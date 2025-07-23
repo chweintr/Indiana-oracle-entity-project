@@ -2,11 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = Number(process.env.PORT);
-if (!PORT) {
-  console.error('PORT env var missing');
-  process.exit(1);
-}
+const PORT = Number(process.env.PORT) || 7432;
 console.log('PORT is', PORT);
 
 const DIST = path.resolve(__dirname, 'dist');
