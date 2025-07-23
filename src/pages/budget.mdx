@@ -1,0 +1,98 @@
+---
+layout: ../layouts/BaseLayout.astro
+title: "Budget — Echoes of Indiana"
+---
+
+import NavBar from '../components/NavBar.astro';
+
+<NavBar />
+
+<div class="max-w-4xl mx-auto px-4 py-16">
+
+# Project Budget
+
+<div class="space-y-8">
+
+<details class="bg-brand-navy/30 rounded-lg border border-brand-teal/20 overflow-hidden">
+  <summary class="px-6 py-4 bg-brand-teal/10 cursor-pointer hover:bg-brand-teal/20 transition-colors font-bold text-brand-teal">
+    Track A: Museum Installation ($285,000)
+  </summary>
+  <div class="p-6">
+    
+**Phase 1 – Portable Kiosk (55″ Transparent OLED)**
+
+| Item | Cost |
+|------|------|
+| LG 55EW5G OLED + pedestal | $14,000 |
+| RTX 4090 workstation + UPS | $8,000 |
+| Mic / depth / directional speaker | $3,500 |
+| Unreal development (3 months) | $19,500 |
+| AI tokens + 10% buffer | $3,000 |
+| **Phase 1 Total** | **$48,000** |
+
+**Phase 2 – Landmark Scrim Wall**
+
+| Item | Cost |
+|------|------|
+| 8×8 ft Hologauze + 12 klm laser projector + hush box | $35,000 |
+| Secondary workstation (fail-over) | $9,000 |
+| Truss, black drape, light grid | $12,000 |
+| Unreal polish, crowd queuing | $18,000 |
+| Install, marketing, 10% buffer | $51,000 |
+| **Phase 2 Total** | **≈ $165,000** |
+
+  </div>
+</details>
+
+<details class="bg-brand-navy/30 rounded-lg border border-brand-amber/20 overflow-hidden">
+  <summary class="px-6 py-4 bg-brand-amber/10 cursor-pointer hover:bg-brand-amber/20 transition-colors font-bold text-brand-amber">
+    Track B: Outdoor Fan-Array Oracle ($49,000)
+  </summary>
+  <div class="p-6">
+    
+| Item | Cost |
+|------|------|
+| 4 × 65 cm Hypervsn fans + controller | $20,000 |
+| Acrylic baffle, steel frame | $4,000 |
+| Workstation | $8,000 |
+| Sensor stack | $3,500 |
+| Unreal dev (4 months) + AI | $12,000 |
+| Contingency | $1,500 |
+| **Total Track B** | **$49,000** |
+
+*Note: Fan-array hum ~60 dB after baffling; monthly rotor maintenance required; night-time lighting optional.*
+
+  </div>
+</details>
+
+</div>
+
+## Project Timeline
+
+<div class="my-12">
+  <img src="/img/timeline.png" alt="Project timeline Gantt chart showing 18-month development schedule" class="w-full rounded-lg shadow-lg" />
+</div>
+
+## Funding Strategy
+
+The project is designed with flexible funding tiers:
+
+- **Phase 1** (Track A): Core museum installation with full AI oracle functionality
+- **Phase 2** (Track B): Extended reality expansion for broader public access
+- **Phase 3**: Educational partnerships and curriculum development
+
+<div class="mt-12 p-6 bg-brand-magenta/10 rounded-lg border border-brand-magenta/20">
+  <h3 class="text-brand-magenta text-xl font-bold mb-4">Complete Proposal</h3>
+  <p class="text-gray-300 mb-4">
+    Download the comprehensive project proposal with detailed specifications, timeline, and implementation plan.
+  </p>
+  <a 
+    href="/docs/echoes-indiana-full-proposal.pdf" 
+    download 
+    class="inline-flex items-center px-4 py-2 bg-brand-magenta text-white font-medium rounded hover:bg-brand-magenta/80 transition-colors"
+  >
+    📄 Download Full PDF Plan
+  </a>
+</div>
+
+</div>

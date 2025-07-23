@@ -1,0 +1,122 @@
+---
+layout: ../layouts/BaseLayout.astro
+title: "Contact — Echoes of Indiana"
+---
+
+import NavBar from '../components/NavBar.astro';
+
+<NavBar />
+
+<div class="max-w-4xl mx-auto px-4 py-16">
+
+# Get In Touch
+
+<div class="grid md:grid-cols-2 gap-12">
+
+<div>
+
+## Project Inquiries
+
+Ready to bring the Oracle Entity Project to your institution? We're excited to discuss implementation possibilities, partnership opportunities, and custom adaptations for your specific needs.
+
+<div class="space-y-6 mt-8">
+  <div class="flex items-center space-x-4">
+    <div class="w-12 h-12 bg-brand-teal/20 rounded-full flex items-center justify-center">
+      <span class="text-brand-teal text-xl">📧</span>
+    </div>
+    <div>
+      <h3 class="font-bold text-brand-teal">Email</h3>
+      <a href="mailto:info@echoesofindiana.org" class="text-brand-amber hover:text-brand-magenta transition-colors">
+        info@echoesofindiana.org
+      </a>
+    </div>
+  </div>
+  
+  <div class="flex items-center space-x-4">
+    <div class="w-12 h-12 bg-brand-magenta/20 rounded-full flex items-center justify-center">
+      <span class="text-brand-magenta text-xl">🏛️</span>
+    </div>
+    <div>
+      <h3 class="font-bold text-brand-magenta">Partnerships</h3>
+      <p class="text-gray-300">Museums, schools, cultural institutions</p>
+    </div>
+  </div>
+  
+  <div class="flex items-center space-x-4">
+    <div class="w-12 h-12 bg-brand-amber/20 rounded-full flex items-center justify-center">
+      <span class="text-brand-amber text-xl">💰</span>
+    </div>
+    <div>
+      <h3 class="font-bold text-brand-amber">Funding</h3>
+      <p class="text-gray-300">Grants, sponsorships, investment</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="bg-brand-navy/30 rounded-lg border border-brand-teal/20 p-6">
+
+## Interest Form
+
+<!--
+Embedded Google Form would go here:
+<iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+-->
+
+<form class="space-y-4">
+  <div>
+    <label class="block text-sm font-medium text-brand-teal mb-2">Organization</label>
+    <input type="text" class="w-full px-3 py-2 bg-brand-navy border border-brand-teal/30 rounded focus:outline-none focus:border-brand-teal text-white" />
+  </div>
+  
+  <div>
+    <label class="block text-sm font-medium text-brand-teal mb-2">Contact Name</label>
+    <input type="text" class="w-full px-3 py-2 bg-brand-navy border border-brand-teal/30 rounded focus:outline-none focus:border-brand-teal text-white" />
+  </div>
+  
+  <div>
+    <label class="block text-sm font-medium text-brand-teal mb-2">Email</label>
+    <input type="email" class="w-full px-3 py-2 bg-brand-navy border border-brand-teal/30 rounded focus:outline-none focus:border-brand-teal text-white" />
+  </div>
+  
+  <div>
+    <label class="block text-sm font-medium text-brand-teal mb-2">Interest Level</label>
+    <select class="w-full px-3 py-2 bg-brand-navy border border-brand-teal/30 rounded focus:outline-none focus:border-brand-teal text-white">
+      <option>Museum Installation</option>
+      <option>Educational Partnership</option>
+      <option>Technology Licensing</option>
+      <option>Custom Development</option>
+      <option>Funding Opportunity</option>
+    </select>
+  </div>
+  
+  <div>
+    <label class="block text-sm font-medium text-brand-teal mb-2">Message</label>
+    <textarea rows="4" class="w-full px-3 py-2 bg-brand-navy border border-brand-teal/30 rounded focus:outline-none focus:border-brand-teal text-white resize-none"></textarea>
+  </div>
+  
+  <button type="submit" class="w-full bg-brand-teal hover:bg-brand-magenta text-brand-navy font-bold py-3 px-4 rounded transition-colors">
+    Send Message
+  </button>
+</form>
+
+</div>
+
+</div>
+
+## Project Timeline
+
+We're actively seeking partners and funding for Phase 1 implementation. The Oracle Entity Project is designed to launch in museum settings by late 2025, with AR expansion following in 2026.
+
+<div class="mt-12 p-6 bg-gradient-to-r from-brand-teal/10 to-brand-magenta/10 rounded-lg border border-brand-teal/20">
+  <h3 class="text-xl font-bold mb-4 bg-gradient-to-r from-brand-teal to-brand-magenta bg-clip-text text-transparent">
+    Join the Conversation
+  </h3>
+  <p class="text-gray-300 leading-relaxed">
+    The Oracle Entity Project represents a new frontier in experiential learning and cultural preservation. 
+    Whether you're an educator, museum professional, technologist, or funding partner, we invite you to be part of this groundbreaking initiative.
+  </p>
+</div>
+
+</div>
