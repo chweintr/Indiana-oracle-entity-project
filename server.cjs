@@ -2,7 +2,13 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = Number(process.env.PORT) || 7432;
+console.log('BOOT', new Date().toISOString());
+
+const PORT = Number(process.env.PORT);
+if (!PORT) {
+  console.error('PORT env var missing');
+  process.exit(1);
+}
 console.log('PORT is', PORT);
 
 const DIST = path.resolve(__dirname, 'dist');
@@ -22,7 +28,7 @@ const MIME = {
   html: 'text/html'
 };
 
-function sendFile(file, res, code = 200) {
+function send(file, res, code = 200) {
   const ext = path.extname(file).slice(1);
   res.writeHead(code, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
   fs.createReadStream(file).pipe(res);
@@ -31,30 +37,23 @@ function sendFile(file, res, code = 200) {
 const server = http.createServer((req, res) => {
   const url = decodeURIComponent(req.url.split('?')[0]);
 
-  // cheap health route
-  if (req.url === '/healthz') {
+  if (url === '/healthz') {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     return res.end('ok');
   }
 
-  // static files
   let filePath = path.join(DIST, url);
   try {
-    if (fs.statSync(filePath).isDirectory()) {
-      filePath = path.join(filePath, 'index.html');
-    }
+    const stat = fs.statSync(filePath);
+    if (stat.isDirectory()) filePath = path.join(filePath, 'index.html');
     if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-      return sendFile(filePath, res);
+      return send(filePath, res);
     }
   } catch (_) {
-    // fall through to SPA fallback
+    // fall through
   }
 
-  // Astro SPA fallback
-  if (fs.existsSync(INDEX)) {
-    return sendFile(INDEX, res);
-  }
-
+  if (fs.existsSync(INDEX)) return send(INDEX, res);
   res.writeHead(404, { 'Content-Type': 'text/plain' }).end('Not found');
 });
 

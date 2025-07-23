@@ -3,9 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "node server.cjs",
     "build": "astro build",
+    "start": "node server.cjs",
+    "dev": "astro dev",
     "preview": "astro preview --host 0.0.0.0 --port $PORT",
     "astro": "astro"
   },

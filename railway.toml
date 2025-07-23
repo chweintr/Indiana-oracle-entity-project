@@ -1,5 +1,5 @@
 [build]
-command = "npm install"
+command = "npm install && npm run build"
 
 [deploy]
-startCommand = "node test-server.cjs"
+startCommand = "node server.cjs"
