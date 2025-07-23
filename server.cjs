@@ -2,7 +2,13 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT);
+if (!PORT) {
+  console.error('PORT env var missing');
+  process.exit(1);
+}
+console.log('PORT is', PORT);
+
 const DIST = path.resolve(__dirname, 'dist');
 const INDEX = path.join(DIST, 'index.html');
 
@@ -29,8 +35,8 @@ function sendFile(file, res, code = 200) {
 const server = http.createServer((req, res) => {
   const url = decodeURIComponent(req.url.split('?')[0]);
 
-  // cheap health check
-  if (url === '/healthz') {
+  // cheap health route
+  if (req.url === '/healthz') {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     return res.end('ok');
   }
@@ -56,6 +62,4 @@ const server = http.createServer((req, res) => {
   res.writeHead(404, { 'Content-Type': 'text/plain' }).end('Not found');
 });
 
-server.listen(PORT, '0.0.0.0', () => {
-  console.log('up on', PORT);
-});
+server.listen(PORT, '0.0.0.0', () => console.log('up on', PORT));
