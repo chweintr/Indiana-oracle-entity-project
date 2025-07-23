@@ -4,8 +4,18 @@ const path = require('path');
 
 const port = process.env.PORT || 3000;
 
+console.log('PORT:', process.env.PORT);
+console.log('Using port:', port);
+
 const server = http.createServer((req, res) => {
   console.log(`Request: ${req.method} ${req.url}`);
+  
+  // Health check endpoint
+  if (req.url === '/healthz') {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('OK');
+    return;
+  }
   
   let filePath = path.join(__dirname, 'dist', req.url === '/' ? 'index.html' : req.url);
   
