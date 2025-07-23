@@ -2,4 +2,4 @@
 command = "npm install"
 
 [deploy]
-startCommand = "node test-server.js"
+startCommand = "node test-server.cjs"
