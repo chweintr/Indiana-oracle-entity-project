@@ -20,10 +20,10 @@ import NavBar from '../components/NavBar.astro';
     <!-- Sound Toggle Button -->
     <button 
       id="soundToggle"
-      class="absolute top-6 right-6 z-30 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300"
+      class="absolute top-4 right-4 z-50 bg-brand-teal hover:bg-brand-teal/80 text-white p-4 rounded-full transition-all duration-300 shadow-lg border-2 border-white/30"
       title="Toggle Sound"
     >
-      <svg id="soundIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg id="soundIcon" class="w-7 h-7" fill="white" stroke="white" viewBox="0 0 24 24">
         <path id="soundPath" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd"/>
         <path id="mutePath" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" class="opacity-0"/>
       </svg>
@@ -32,32 +32,38 @@ import NavBar from '../components/NavBar.astro';
     <!-- Overlay -->
     <div class="absolute inset-0 bg-brand-navy/50 z-10"></div>
     
-    <!-- Desktop: Left Side Content -->
-    <div class="hidden md:block absolute left-8 top-1/2 transform -translate-y-1/2 z-20 max-w-lg">
+    <!-- Desktop: Right Side Vertical Content -->
+    <div class="hidden md:block absolute right-8 top-1/2 transform -translate-y-1/2 z-20 w-96">
       <div class="bg-black/30 backdrop-blur-sm rounded-2xl p-8 border border-brand-teal/20">
-        <h1 class="text-4xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-brand-teal to-brand-magenta bg-clip-text text-transparent">
+        <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-brand-teal to-brand-magenta bg-clip-text text-transparent text-center">
           Echoes of Indiana
         </h1>
-        <h2 class="text-lg lg:text-2xl text-white mb-6 font-light">
+        <h2 class="text-xl text-white mb-6 font-light text-center">
           The Oracle Entity Project
         </h2>
-        <blockquote class="text-base lg:text-lg text-brand-amber italic mb-8 leading-relaxed">
+        <blockquote class="text-base text-brand-amber italic mb-8 leading-relaxed text-center">
           "Hold a conversation with Indiana's past, present, and possible futures."
         </blockquote>
         
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4 mb-8">
           <a 
             href="/experience" 
-            class="bg-brand-teal hover:bg-brand-magenta text-brand-navy font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 text-center"
+            class="bg-brand-teal hover:bg-brand-magenta text-brand-navy font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 text-center"
           >
             Deep Dive
           </a>
           <a 
             href="/budget" 
-            class="border-2 border-brand-amber text-brand-amber hover:bg-brand-amber hover:text-brand-navy font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 text-center"
+            class="border-2 border-brand-amber text-brand-amber hover:bg-brand-amber hover:text-brand-navy font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 text-center"
           >
             Budget
           </a>
+        </div>
+        
+        <div class="text-center pt-6 border-t border-brand-teal/20">
+          <p class="text-white/70 text-sm mb-2">Contact</p>
+          <p class="text-brand-teal text-lg font-medium">Caleb Weintraub</p>
+          <p class="text-brand-amber text-sm">calebweintraubstudios@gmail.com</p>
         </div>
       </div>
     </div>
@@ -92,11 +98,6 @@ import NavBar from '../components/NavBar.astro';
       </div>
     </div>
 
-    <!-- Desktop: Right Side - Oracle Viewing Area -->
-    <div class="hidden md:block absolute right-8 bottom-8 z-20 text-right">
-      <p class="text-white/70 text-sm mb-2">Witness the Oracle Entity</p>
-      <p class="text-brand-teal text-xs">Kurt Vonnegut • Live Hologram</p>
-    </div>
   </section>
 
   <script>
