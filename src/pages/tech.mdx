@@ -44,13 +44,13 @@ sequenceDiagram
 
 | Layer | Component | Spec | Latency (ms) |
 |-------|-----------|------|-------------|
-| Capture | ClearOne BMA-CT | 12° beam, −48 dB noise floor | <10 |
-| Vision | Intel RealSense D435 | 90 fps depth | <10 |
+| Capture | ClearOne BMA-CT | 12° beam, −48 dB noise floor | &lt;10 |
+| Vision | Intel RealSense D435 | 90 fps depth | &lt;10 |
 | ASR | OpenAI Whisper-tiny | Local processing | 120 |
 | Inference | GPT-4o 32k on Groq LPU | RAG prompt | 250–400 |
 | TTS | ElevenLabs | 22050 Hz synthesis | 350 |
 | Avatar mouth | HeyGen live-talk | Real-time sync | 60 |
-| **Total** | | | **< 700ms** |
+| **Total** | | | **&lt; 700ms** |
 
 </div>
 
