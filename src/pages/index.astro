@@ -9,12 +9,25 @@ import NavBar from '../components/NavBar.astro';
   <section class="relative h-screen flex items-center justify-center overflow-hidden">
     <!-- Video Background -->
     <iframe 
-      src="https://www.youtube.com/embed/VXCqxZ8AXwU?autoplay=1&mute=1&loop=1&playlist=VXCqxZ8AXwU&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1"
+      id="heroVideo"
+      src="https://www.youtube.com/embed/VXCqxZ8AXwU?autoplay=1&mute=1&loop=1&playlist=VXCqxZ8AXwU&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1"
       class="absolute inset-0 w-full h-full object-cover z-0"
-      style="border: none; pointer-events: none;"
+      style="border: none;"
       allow="autoplay; encrypted-media"
       allowfullscreen>
     </iframe>
+    
+    <!-- Sound Toggle Button -->
+    <button 
+      id="soundToggle"
+      class="absolute top-6 right-6 z-30 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300"
+      title="Toggle Sound"
+    >
+      <svg id="soundIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path id="soundPath" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd"/>
+        <path id="mutePath" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" class="opacity-0"/>
+      </svg>
+    </button>
     
     <!-- Overlay -->
     <div class="absolute inset-0 bg-brand-navy/50 z-10"></div>
@@ -47,4 +60,49 @@ import NavBar from '../components/NavBar.astro';
       </div>
     </div>
   </section>
+
+  <script>
+    let isMuted = true;
+    let player;
+
+    // Load YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Called when YouTube API is ready
+    window.onYouTubeIframeAPIReady = function() {
+      player = new YT.Player('heroVideo', {
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+    }
+
+    function onPlayerReady(event) {
+      const soundToggle = document.getElementById('soundToggle');
+      const soundPath = document.getElementById('soundPath');
+      const mutePath = document.getElementById('mutePath');
+
+      soundToggle.addEventListener('click', function() {
+        if (isMuted) {
+          player.unMute();
+          player.setVolume(30); // Set to 30% volume
+          soundPath.classList.remove('opacity-0');
+          mutePath.classList.add('opacity-0');
+          isMuted = false;
+        } else {
+          player.mute();
+          soundPath.classList.add('opacity-0');
+          mutePath.classList.remove('opacity-0');
+          isMuted = true;
+        }
+      });
+
+      // Initial state - muted with mute icon visible
+      soundPath.classList.add('opacity-0');
+      mutePath.classList.remove('opacity-0');
+    }
+  </script>
 </BaseLayout>
