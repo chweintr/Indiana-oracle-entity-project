@@ -1,5 +1,5 @@
 [build]
-command = "npm run build"
+command = "npm install && npm run build"
 
 [deploy]
-startCommand = "npm run start"
+startCommand = "serve dist -s -l tcp://0.0.0.0:$PORT"
