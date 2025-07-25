@@ -25,7 +25,10 @@ const MIME = {
   jpeg: 'image/jpeg',
   svg: 'image/svg+xml',
   wasm: 'application/wasm',
-  html: 'text/html'
+  html: 'text/html',
+  m4a: 'audio/mp4',
+  mp4: 'video/mp4',
+  mp3: 'audio/mpeg'
 };
 
 function send(file, res, code = 200) {
