@@ -8,17 +8,14 @@ import NavBar from '../components/NavBar.astro';
   
   <section class="relative h-screen flex items-center justify-center overflow-hidden">
     <!-- Video Background -->
-    <video 
+    <iframe 
       id="heroVideo"
-      autoplay
-      muted
-      loop
-      playsinline
+      src="https://www.youtube.com/embed/VXCqxZ8AXwU?autoplay=1&mute=1&loop=1&playlist=VXCqxZ8AXwU&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1"
       class="absolute inset-0 w-full h-full object-cover z-0"
-    >
-      <source src="/video/vonnegut_blinking.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+      style="border: none;"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
     
     <!-- Sound Toggle Button -->
     <button 
@@ -105,22 +102,37 @@ import NavBar from '../components/NavBar.astro';
 
   <script>
     let isMuted = true;
-    const video = document.getElementById('heroVideo');
-    const soundToggle = document.getElementById('soundToggle');
-    const soundPath = document.getElementById('soundPath');
-    const mutePath = document.getElementById('mutePath');
+    let player;
 
-    // Wait for video to load
-    video.addEventListener('loadeddata', function() {
+    // Load YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Called when YouTube API is ready
+    window.onYouTubeIframeAPIReady = function() {
+      player = new YT.Player('heroVideo', {
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+    }
+
+    function onPlayerReady(event) {
+      const soundToggle = document.getElementById('soundToggle');
+      const soundPath = document.getElementById('soundPath');
+      const mutePath = document.getElementById('mutePath');
+
       soundToggle.addEventListener('click', function() {
         if (isMuted) {
-          video.muted = false;
-          video.volume = 0.3; // Set to 30% volume
+          player.unMute();
+          player.setVolume(30); // Set to 30% volume
           soundPath.classList.remove('opacity-0');
           mutePath.classList.add('opacity-0');
           isMuted = false;
         } else {
-          video.muted = true;
+          player.mute();
           soundPath.classList.add('opacity-0');
           mutePath.classList.remove('opacity-0');
           isMuted = true;
@@ -130,6 +142,6 @@ import NavBar from '../components/NavBar.astro';
       // Initial state - muted with mute icon visible
       soundPath.classList.add('opacity-0');
       mutePath.classList.remove('opacity-0');
-    });
+    }
   </script>
 </BaseLayout>
