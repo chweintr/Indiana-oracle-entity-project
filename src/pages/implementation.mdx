@@ -116,11 +116,56 @@ Pilot installation at partner institution (university library or local museum) f
 
 ## Option A: Advanced Display Technology Path
 
-### Technical Implementation Playbook
+### Practical Implementation Guide
 
 <div class="mb-8">
 
-### B) Narrative Playbook — Pepper's Ghost (and Adjacent) Path
+### Pepper's Ghost (Projection) — Recommended
+
+**Why:** Bright, large image, true blacks, cheap per square foot. Real-time feed from Unreal/TouchDesigner or straight video.
+
+**What the atrium must give us:**
+- **Depth behind/under foil:** ≥ 6 ft clear (projector + black cavity)
+- **Low ambient light at foil plane:** ≤ 50 lux. Plan baffling/hoods or dimmable zones
+- **Footprint:** 10 ft wide head = ~6 ft tall image → foil frame ~12 × 8 ft
+- **Projector:** 10–12K lumen laser, short-throw (~0.8:1) with lens shift. Two units blended if budget allows
+- **Black box:** velvet/DarkMat lining, service access door, HVAC that won't ripple foil
+- **Viewing stand-off:** 6–8 ft minimum to hide edges
+
+**Pipeline:** Mic → STT/LLM/TTS → visemes/emotion JSON → render (engine or compositor) on black → projector → foil. Hue/DMX pulses bounce off walls/ceiling, never the foil.
+
+---
+
+### Pepper's Ghost (Screen Reflection) — Backup
+
+Use a 55–98″ OLED at 45° if you can't get throw depth. Faster install, shallower cavity. You fight: bezels, lower brightness, "not quite black" blacks. Good for PoC or tight spaces.
+
+---
+
+### HYPERVSN — Entry Teaser / Satellite
+
+Rotating LED fan arrays in a Glass Box. Loud without the box, limited facial nuance, but perfect as a lure near the entrance. Loop a 15–20 s "Oracle is speaking inside" piece or a procedural title (Veo 3 / TouchDesigner / C4D spline vibes). Keep the main Oracle on PG/light-field.
+
+Ask them: live ingest (NDI/WebRTC?), latency, API hooks. If "no", treat it as pre-render only.
+
+---
+
+### Teaser Content Idea
+
+Procedural particle typography: "ORACLE ENTITY" forming from motes then shattering. Make it in TD/Notch or with Google Veo 3 and grade to your palette (teal/magenta/amber). Run silently or with a spatial chime so it doesn't clash with main audio.
+
+---
+
+### Construction Ask (put this in the architect brief)
+- **Reserve a projection bay:** 6 ft deep × width of foil, full blackout
+- **Provide power & ventilation** for 1–2 projectors (≈1.0–1.5 kW each) and a workstation
+- **Mounting points** for a tensioned 45° foil frame (or beamsplitter glass, if permanent)
+- **Lighting zones:** independent dimming near the vitrine; DMX/Hue-ready circuits
+- **Cable paths** (SDI/DP, Cat6 for NDI) and service access (front and rear)
+
+---
+
+### B) Detailed Technical Playbook — Pepper's Ghost (and Adjacent) Path
 
 #### 1. Define objectives and scale
 
