@@ -1,0 +1,12 @@
+parameter,value
+ceiling_clear_ft,11.0
+platform_height_ft,2.0
+viewer_eye_height_ft,5.5
+viewer_to_foil_front_ft,8.0
+foil_width_ft,12.0
+foil_vertical_height_ft,8.0
+foil_angle_deg,45.0
+foil_depth_ft,8.0
+mask_wall_height_ft,2.22
+mask_wall_offset_front_ft,0.5
+ground_screen_recess_ft,0.2
