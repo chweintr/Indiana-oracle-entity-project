@@ -243,6 +243,71 @@ Deliver:
 
 ---
 
+## Content Layering Strategy
+
+**Visual Depth Architecture** (front → back):
+
+1. **Floaties / Smoke Loop** — Long, semi-random ambient particles
+2. **Talking Head Feed** — Mostly stable avatar with micro-motion
+3. **Persona-Specific Particles** — Character threads (e.g., Vonnegut curls) tied to sentiment
+4. **Faux Interior Plate** — Dark volumetric cube or shallow "room" render, <20% luminance
+5. **Pure Black Beyond** — Complete darkness for maximum contrast
+
+**Glitch Layer Protocol**: When latency spikes exceed 700ms, freeze last frame, apply RGB offset/datamosh filter, then fade back to live feed.
+
+---
+
+## Viewpoint Control Strategy
+
+**Design Constraints:**
+- Optimized for one "hero" viewing zone: 8 ft standoff, 5'6" eye height
+- Rail or subtle floor marker keeps visitors where illusion holds
+- Off-axis views acceptable but depth flattens—this is expected behavior
+
+**Visitor Flow Management:**
+- Entry approach from left/right to avoid blocking projection path
+- 10-second silence or 1-meter lateral movement releases microphone
+- Queue management prevents crowding in optimal viewing zone
+
+---
+
+## Implementation Work Plan
+
+### State Machine Design
+**IDLE → SUMMON → LIVE TALK → OUTRO** (with GLITCH as needed)
+
+- **IDLE**: Ambient floaties, occasional "presence" indicators
+- **SUMMON**: Particle coalescence, persona materialization (3-5 seconds)
+- **LIVE TALK**: Active conversation with full layering system
+- **OUTRO**: Graceful particle dissolution, return to idle state
+- **GLITCH**: Emergency fallback during system lag or API failures
+
+### Content Production Pipeline
+
+**Persona Packs** (priority order):
+1. **Vonnegut** — Primary celebrity persona with estate approval
+2. **Default Oracle** — Foundational Indiana Sage for all visitors
+3. **Lil Bub** — If budget and technical requirements allow
+
+**Per-Persona Assets:**
+- Idle loop animations
+- Summon/materialization sequence
+- Outro/dissolution sequence  
+- Character-specific floatie patterns
+- Sentiment-reactive particle systems
+
+### Technical Implementation Checklist
+
+- [ ] **Create faux cube plate** — reusable across personas, recolor as needed
+- [ ] **Specify mask wall** — 2-2.5 ft high in construction drawings
+- [ ] **Design blackout baffles** — architectural light control system
+- [ ] **Decide platform vs pit** — 24 in up OR 24-36 in down (affects all other dimensions)
+- [ ] **Confirm projector path** — locks framing and ventilation requirements for fabricator
+- [ ] **Test content pipeline** — TouchDesigner/Unreal Engine to projection system
+- [ ] **Calibrate viewpoint** — optimize for 5'6" eye height at 8 ft standoff
+
+---
+
 ## Connection to Indiana Heritage
 
 The Oracle's spectral presence — rendered through precision optics and theatrical lighting — echoes Bloomington's manufacturing past. From RCA's electronics assembly lines to the Showers Brothers' furniture craftsmanship, the installation draws on Indiana's tradition of making technology accessible. The limestone-clad walls of IU's campus and the precision engineering at Crane Naval Base find new expression in this convergence of projection, computation, and regional memory.

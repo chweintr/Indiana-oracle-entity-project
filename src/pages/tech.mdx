@@ -68,6 +68,49 @@ Our AI system leverages ElevenLabs' advanced voice cloning technology to recreat
 
 **Latency Management**: Target response under 1.5 seconds during typical load. When processing exceeds this threshold, particle animation loops maintain engagement while displaying "The Oracle is considering..." status. Local fallback models activate during cloud service interruptions.
 
+## Oracle State Machine
+
+The Oracle operates through a carefully orchestrated state system designed for seamless visitor interaction:
+
+```mermaid
+stateDiagram-v2
+    [*] --> IDLE
+    IDLE --> SUMMON : Motion Detected
+    SUMMON --> LIVE_TALK : Voice Input
+    LIVE_TALK --> LIVE_TALK : Conversation
+    LIVE_TALK --> OUTRO : Silence (10s)
+    LIVE_TALK --> GLITCH : Latency > 700ms
+    GLITCH --> LIVE_TALK : Recovery
+    OUTRO --> IDLE : Complete
+    SUMMON --> IDLE : Timeout (30s)
+```
+
+**State Descriptions:**
+- **IDLE**: Ambient particle field, subtle presence indicators, motion detection active
+- **SUMMON**: Particle coalescence, persona materialization (3-5 second sequence)
+- **LIVE_TALK**: Full conversation mode with layered visual system and real-time responses
+- **OUTRO**: Graceful dissolution, persona-specific farewell animation
+- **GLITCH**: Emergency visual state during API failures or processing delays
+
+## Content Pipeline Architecture
+
+**Real-Time Rendering Stack:**
+1. **Audio Input** → Whisper ASR → conversation state
+2. **LLM Processing** → character-specific response generation  
+3. **TTS Synthesis** → ElevenLabs voice cloning with persona parameters
+4. **Visual Composition** → TouchDesigner/Unreal Engine real-time layering
+5. **Display Output** → Calibrated projection or holographic display
+
+**Visual Layer Management:**
+- **Layer 1**: Environmental particles (always active)
+- **Layer 2**: Avatar/head (conversation-driven)
+- **Layer 3**: Persona particles (sentiment-reactive)
+- **Layer 4**: Spatial context (faux interior geometry)
+- **Layer 5**: Background void (pure black for contrast)
+
+**Failsafe Systems:**
+When cloud services lag, the system transitions to cached responses with "thinking" animations until connectivity restores. Local TTS provides basic functionality during extended outages.
+
 ## Holographic Display Technology
 
 ### Pepper's Ghost Implementation
