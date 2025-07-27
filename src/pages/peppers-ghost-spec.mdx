@@ -19,14 +19,18 @@ Large Pepper's Ghost "hologram" of a talking head, driven by real-time AI. Proje
 ## Room & Build Requirements
 
 **Footprint**  
-- Vitrine / foil width: **10 ft** (image ~6 ft wide inside)  
+- Foil plane: **14 ft W × 9 ft H** @ 45° (visible image 8 ft × 8 ft)  
 - Projection bay (behind/under foil): **6 ft** deep (projector + service)  
-- Viewer stand-off: **8 ft** minimum (rail or floor marker)  
-- Total depth reserved in atrium: **≈14–16 ft** (foil to viewer rail)  
+- Viewer stand-off: **8 ft** minimum, 6 ft absolute minimum (rail or floor marker)  
+- Viewer eye height: **5 ft 6 in** design standard
+- Platform build-up: **24 in** OR 24–36 in recess option
+- Total depth reserved in atrium: **≈20–22 ft** (foil to viewer rail)  
 - Ceiling clear height: **≥ 11 ft** (foil frame + lighting)
 
 **Surfaces**  
-- Projection bay walls, floor, ceiling: matte black (velvet/DarkMat). No stray light.  
+- Projection bay walls, floor, ceiling: matte black (velvet/DarkMat). No stray light.
+- **Mask wall:** 2–2.5 ft high, matte black, blocks ground screen sightlines
+- **Blackout zone:** spill baffles and light control around installation
 - Service access: rear or side door large enough for projector/computer swap.
 
 **Lighting**  
@@ -36,6 +40,7 @@ Large Pepper's Ghost "hologram" of a talking head, driven by real-time AI. Proje
 - DMX or Hue-capable circuits for synced accent lights (never spill on the foil)  
 - Spot fixtures for physical props inside the vitrine (aimed away from foil)
 - Alternative: Higher-lumen projectors (15-20k) if ambient light cannot be controlled
+- **Throw path:** projector → ground screen → foil → viewer
 
 **Power & HVAC**  
 - Electrical: 30-40A dedicated circuits (dual 10k-lumen projectors draw ~2kW combined + workstation)
@@ -55,10 +60,13 @@ Large Pepper's Ghost "hologram" of a talking head, driven by real-time AI. Proje
 
 ## Projection Package
 
-- Laser projector, **10–12K lumens**, short-throw (~0.8:1) with generous lens shift.  
-- Option: dual blended projectors for brightness and failover.  
-- Rated for 24/7 or "museum mode". Plan idle/dim state when no visitors.  
-- Black background content (render on #000000) for clean reflections.
+- Laser projector, **10–12K lumens** (Epson Pro L1200U + ELPLU03S or Panasonic PT-RZ990 + ET-DLE060)
+- Lens shift ±50% V / ±20% H for flexible positioning
+- Short-throw (~0.8:1) with generous lens shift capabilities  
+- Option: dual blended projectors for brightness and failover  
+- Rated for 24/7 or "museum mode". Plan idle/dim state when no visitors  
+- Black background content (render on #000000) for clean reflections
+- **Latency budget:** < 700 ms total system response
 
 ---
 
@@ -66,7 +74,7 @@ Large Pepper's Ghost "hologram" of a talking head, driven by real-time AI. Proje
 
 - Daily runtime: 8–12 hours. Dim/idle when idle.  
 - Clean projector filters (or use filter-free units). Log hours; swap before dimming becomes obvious.  
-- Foil/glass: gloves only, mild soap (no ammonia), microfiber. Watch for wrinkles, drafts.  
+- Foil/glass: anti-static microfiber, no ammonia. Quick-swap foil frame system. Watch for wrinkles, drafts.  
 - Watchdog script on media server for auto-restart. Remote reboot access.
 
 **Maintenance Contract**: Quarterly service visits including spare parts inventory (replacement foil, lamp modules, filters). Staff training on basic diagnostics, cleaning procedures, and emergency shutdown protocols. Remote monitoring system for projector health and system performance.
@@ -137,12 +145,12 @@ Large Pepper's Ghost "hologram" of a talking head, driven by real-time AI. Proje
 
 <div class="my-8">
   <img 
-    src="/images/pg_section.png" 
-    alt="Pepper's Ghost cross-section diagram showing viewer position, 45° foil angle, projector placement, and dimensional requirements"
-    class="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
+    src="/images/pg_section_new.svg" 
+    alt="Updated Pepper's Ghost cross-section showing 14ft×9ft foil plane, 8ft×8ft visible image, mask wall, viewer sightlines, and projection path"
+    class="w-full max-w-4xl mx-auto rounded-lg shadow-lg bg-white"
   />
   <p class="text-center text-sm text-gray-400 mt-2">
-    Cross-section view of Pepper's Ghost installation with critical dimensions
+    <strong>Updated Cross-section:</strong> 14 ft × 9 ft foil plane, 8 ft × 8 ft visible image, mask wall, blackout zone
   </p>
 </div>
 
@@ -182,13 +190,17 @@ Deliver:
 
 ```json
 {
-  "image_width_ft": 6.0,
-  "image_height_ft": 3.5,
+  "image_width_ft": 8.0,
+  "image_height_ft": 8.0,
+  "foil_plane_width_ft": 14.0,
+  "foil_plane_height_ft": 9.0,
   "foil_angle_deg": 45,
   "viewer_standoff_ft": 8.0,
+  "viewer_min_standoff_ft": 6.0,
+  "platform_height_in": 24,
+  "pit_depth_in": 24,
+  "mask_wall_height_ft": 2.25,
   "projection_depth_ft": 6.0,
-  "vitrine_width_ft": 10.0,
-  "total_depth_ft": 15.0,
   "ambient_lux_max": 50,
   "ceiling_clear_ft": 11.0
 }
