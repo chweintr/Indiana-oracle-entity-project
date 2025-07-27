@@ -170,6 +170,13 @@ Regardless of display technology, we want a cube/vitrine presence without killin
 - **Sides/back:** Matte black or smoked panels to kill reflections
 - **Interior illusion:** Dim faux room/cube behind the head—barely visible geometry to sell depth without fighting the foil
 
+**Visual Layer Management** (front → back):
+1. **Environmental particles** (always active)
+2. **Avatar/head** (conversation-driven)
+3. **Persona particles** (sentiment-reactive)
+4. **Spatial context** (faux interior geometry, &lt;20% luminance)
+5. **Background void** (pure black for contrast)
+
 ---
 
 ## Option A: Advanced Display Technology Path
@@ -195,10 +202,15 @@ Regardless of display technology, we want a cube/vitrine presence without killin
 - **Depth behind/under foil:** ≥ 6 ft clear (projector + black cavity)
 - **Low ambient light at foil plane:** ≤ 50 lux. Plan baffling/hoods or blackout spill baffles
 - **Footprint:** 14 ft wide foil plane = 8 ft × 8 ft visible image → foil frame 14 × 9 ft
-- **Projector:** 10–12K lumen laser (Epson Pro L1200U + ELPLU03S or Panasonic PT-RZ990), lens shift ±50% V / ±20% H
+- **Projector:** 10–12K lumen laser (Epson Pro L1200U + ELPLU03S 0.65–0.75:1 or Panasonic PT-RZ990 + ET-DLE060 0.6–0.8:1)
+- **Lens shift:** ±50% vertical, ±20% horizontal
 - **Black box:** velvet/DarkMat lining, service access door, HVAC dust control
 - **Viewing stand-off:** 8 ft minimum (6 ft absolute minimum) to hide edges
 - **Mask wall:** 2–2.5 ft high, matte black, blocks ground screen sightlines
+- **Viewer eye height:** 5 ft 6 in design standard
+- **Platform build-up:** 24 in OR 24–36 in recess option
+- **Latency budget:** &lt;700 ms end-to-end
+- **Cleaning:** anti-static microfiber, no ammonia, quick-swap foil frame
 
 **Pipeline:** Throw path: projector → ground screen → foil → viewer. Mic → STT/LLM/TTS → visemes/emotion JSON → render on black → projector → foil. Hue/DMX pulses bounce off walls/ceiling, never the foil.
 
@@ -305,8 +317,18 @@ Choose on: portability, life expectancy, and image quality. Foil for prototypes,
 
 * **Home PoC (&lt;$5 k):** ~3 m² foil, 5 k lm short‑throw, truss frame, black cloth, Hue test lights, laptop.
 * **Mid install (~$45 k):** 10–12 k lm projector, Hologauze/foil, DarkMat, media server license, rigging, basic DMX/Hue, pro labor.
-* **Museum (~$100 k):** 20 k lm projection or dual blend, custom frames or glass, advanced media server, DMX grid, redundancy, service contract.
+* **Museum (~$100 k):** dual 10-12k lm projection blend, custom frames or glass, advanced media server, DMX grid, redundancy, service contract.
 * **Flagship (~$150 k):** multiple surfaces, curved glass, robotics or tracking, building system integration, R&D buffer.
+
+#### 8a. Implementation Steps
+
+1. **Order foil, truss, projector, media server** — coordinate lead times
+2. **Fabricate platform or excavate pit** — 24 in up OR 24–36 in down
+3. **Hang foil frame at 45°** — tensioned with quick-release access
+4. **Install ground screen/projector** — focus with lens shift (no digital warp)
+5. **Light plot focusing and lux check** — verify ≤50 lux at foil plane
+6. **Content test** — grayscale ramp → contrast → particle-head clip
+7. **Commissioning checklist and sign-off** — full system verification
 
 #### 9. Documentation & handover
 

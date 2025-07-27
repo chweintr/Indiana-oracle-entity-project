@@ -189,12 +189,12 @@ Layers:
   L_VIEWER, L_FOIL, L_PROJECTOR, L_CAVITY, L_LIGHT, L_DIM, L_CENTERLINE
 
 Params (edit if needed):
-image_width_ft = 6
-image_height_ft = 3.5
+image_width_ft = 8
+image_height_ft = 8
 foil_angle_deg = 45
 viewer_standoff_ft = 8
 projection_depth_ft = 6
-vitrine_width_ft = 10
+vitrine_width_ft = 14
 ambient_lux_max = 50
 ceiling_clear_ft = 11
 
@@ -255,6 +255,10 @@ Deliver:
 
 **Glitch Layer Protocol**: When latency spikes exceed 700ms, freeze last frame, apply RGB offset/datamosh filter, then fade back to live feed.
 
+**Throw Path**: projector → ground screen → foil → viewer
+
+**Registration**: All clips and live feed share the same frame, head position, and scale. Build a hidden guides layer for alignment, then crop/black it out.
+
 ---
 
 ## Viewpoint Control Strategy
@@ -295,6 +299,16 @@ Deliver:
 - Outro/dissolution sequence  
 - Character-specific floatie patterns
 - Sentiment-reactive particle systems
+
+### Implementation Steps
+
+1. **Order foil, truss, projector, media server** — confirm lead times and delivery coordination
+2. **Fabricate platform or excavate pit** — 24 in build-up OR 24-36 in recess option
+3. **Hang foil frame at 45°** — tensioned system with quick-release maintenance access
+4. **Install ground screen/projector** — focus with lens shift (no digital warp)
+5. **Light plot focusing and lux check** — verify ≤50 lux at foil plane
+6. **Content test** — grayscale ramp → contrast → particle-head clip
+7. **Commissioning checklist and sign-off** — full system verification
 
 ### Technical Implementation Checklist
 
