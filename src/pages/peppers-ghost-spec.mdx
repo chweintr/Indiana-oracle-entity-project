@@ -1,0 +1,174 @@
+---
+layout: ../layouts/BaseLayout.astro
+title: "Pepper's Ghost Install Spec — Echoes of Indiana"
+---
+
+import NavBar from '../components/NavBar.astro';
+
+<NavBar />
+
+<div class="max-w-4xl mx-auto px-4 py-16">
+
+# Pepper's Ghost Install Spec
+
+## What this is  
+Large Pepper's Ghost "hologram" of a talking head, driven by real-time AI. Projection onto a 45° foil/glass plane inside a dark cavity.
+
+---
+
+## Room & Build Requirements
+
+**Footprint**  
+- Vitrine / foil width: **10 ft** (image ~6 ft wide inside)  
+- Projection bay (behind/under foil): **6 ft** deep (projector + service)  
+- Viewer stand-off: **8 ft** minimum (rail or floor marker)  
+- Total depth reserved in atrium: **≈14–16 ft** (foil to viewer rail)  
+- Ceiling clear height: **≥ 11 ft** (foil frame + lighting)
+
+**Surfaces**  
+- Projection bay walls, floor, ceiling: matte black (velvet/DarkMat). No stray light.  
+- Service access: rear or side door large enough for projector/computer swap.
+
+**Lighting**  
+- Ambient at foil plane: **≤ 50 lux**.  
+- Independent dimming zone or baffle/hood over the bay.  
+- DMX or Hue-capable circuits for synced accent lights (never spill on the foil).  
+- Spot fixtures for physical props inside the vitrine (aimed away from foil).
+
+**Power & HVAC**  
+- Electrical: 2 × 20A 120V (or 1 × 20A 208V) dedicated for projector(s) + workstation.  
+- HVAC: no vents blowing across foil; keep temp 68–75 °F. Allow return airflow for projector heat.
+
+**Network & Cabling**  
+- 2 × Cat6 to rack (NDI/control).  
+- SDI or DisplayPort-rated run to projector (avoid long HDMI).  
+- Local ethernet switch near workstation.
+
+**Noise**  
+- Keep HVAC and ambient noise low in viewer zone. Projector is isolated in bay.
+
+---
+
+## Projection Package
+
+- Laser projector, **10–12K lumens**, short-throw (~0.8:1) with generous lens shift.  
+- Option: dual blended projectors for brightness and failover.  
+- Rated for 24/7 or "museum mode". Plan idle/dim state when no visitors.  
+- Black background content (render on #000000) for clean reflections.
+
+---
+
+## Ops & Maintenance
+
+- Daily runtime: 8–12 hours. Dim/idle when idle.  
+- Clean projector filters (or use filter-free units). Log hours; swap before dimming becomes obvious.  
+- Foil/glass: gloves only, mild soap (no ammonia), microfiber. Watch for wrinkles, drafts.  
+- Watchdog script on media server for auto-restart. Remote reboot access.
+
+---
+
+## Alternatives (if projection depth or light control is denied)
+
+- **Screen Reflection (OLED/LCD at 45°):** shallower, easier alignment, weaker blacks/brightness.  
+- **Transparent OLED stack:** sleek, but contrast suffers in bright lobbies.  
+- **Looking Glass light-field:** true parallax, heavy GPU load, fixed cone.  
+- **HYPERVSN:** good teaser near entrance, not primary head (fan noise, limited nuance).  
+- **Fog/mist screen:** effect layer only; high maintenance.
+
+---
+
+## Downloadables / Hand-offs
+
+- One-page PDF (plan + section + spec)  
+- DXF/SVG schematic for GC/AV teams  
+- JSON param block for regenerating CAD quickly
+
+*(Ask for these once dims are final.)*
+
+---
+
+## Technical Diagram
+
+<div class="my-8">
+  <img 
+    src="/images/pg_section.png" 
+    alt="Pepper's Ghost cross-section diagram showing viewer position, 45° foil angle, projector placement, and dimensional requirements"
+    class="w-full max-w-4xl mx-auto rounded-lg shadow-lg"
+  />
+  <p class="text-center text-sm text-gray-400 mt-2">
+    Cross-section view of Pepper's Ghost installation with critical dimensions
+  </p>
+</div>
+
+---
+
+## CAD Agent Prompt (for Claude/GPT CAD tools)
+
+```text
+Task: Produce a dimensioned 2D schematic (plan + side section) for a Pepper's Ghost vitrine. Output DXF (and SVG) with layers.
+
+Layers:
+  L_VIEWER, L_FOIL, L_PROJECTOR, L_CAVITY, L_LIGHT, L_DIM, L_CENTERLINE
+
+Params (edit if needed):
+image_width_ft = 6
+image_height_ft = 3.5
+foil_angle_deg = 45
+viewer_standoff_ft = 8
+projection_depth_ft = 6
+vitrine_width_ft = 10
+ambient_lux_max = 50
+ceiling_clear_ft = 11
+
+Rules:
+- Units: feet/inches in labels.
+- Foil at 45°, centered in 10 ft opening.
+- Draw projector icon + throw path inside 6 ft cavity.
+- Viewer zone rectangle at 8 ft.
+- Place light symbols above foil.
+- All dims + callouts on L_DIM.
+
+Deliver:
+1) DXF with correct layers
+2) SVG (no raster)
+3) Table (JSON) of all critical dims and coordinates
+```
+
+```json
+{
+  "image_width_ft": 6.0,
+  "image_height_ft": 3.5,
+  "foil_angle_deg": 45,
+  "viewer_standoff_ft": 8.0,
+  "projection_depth_ft": 6.0,
+  "vitrine_width_ft": 10.0,
+  "total_depth_ft": 15.0,
+  "ambient_lux_max": 50,
+  "ceiling_clear_ft": 11.0
+}
+```
+
+---
+
+## To-Do Before Construction Drawings
+
+- Confirm final image size and head scale.
+- Confirm projector make/model (or lumen target).
+- Verify route for service access (door size, lift).
+- Decide on idle/detection logic (sensor or schedule).
+- Lock lighting circuit and control protocol (DMX vs Hue).
+- Decide if a teaser (HYPERVSN/LED sign) is part of scope.
+
+---
+
+## Connection to Indiana Heritage
+
+The Oracle's spectral presence — rendered through precision optics and theatrical lighting — echoes Bloomington's manufacturing past. From RCA's electronics assembly lines to the Showers Brothers' furniture craftsmanship, the installation draws on Indiana's tradition of making technology accessible. The limestone-clad walls of IU's campus and the precision engineering at Crane Naval Base find new expression in this convergence of projection, computation, and regional memory.
+
+---
+
+<div class="text-xs text-gray-500 mt-8">
+**Note:** iPad compatibility issues identified with Lil Bub video playback and Gantt chart rendering. Consider alternative video embed methods and static images for mobile Safari compatibility.
+</div>
+
+</div>
