@@ -50,7 +50,7 @@ sequenceDiagram
 | Inference | GPT-4o 32k on Groq LPU | RAG prompt | 250–400 |
 | TTS | ElevenLabs | 22050 Hz synthesis | 350 |
 | Avatar mouth | HeyGen live-talk | Real-time sync | 60 |
-| **Total** | | | **&lt; 700ms** |
+| **Total** | | | **target &lt; 1.5s** |
 
 </div>
 
@@ -64,8 +64,9 @@ Our AI system leverages ElevenLabs' advanced voice cloning technology to recreat
 - **Primary**: ElevenLabs custom voice models
 - **Secondary**: Neural voice synthesis with persona-tuned parameters  
 - **Tertiary**: High-quality text-to-speech with accent modification
+- **Emergency**: Local model responses with pre-recorded audio during API outages
 
-The physical avatar morphing system transitions seamlessly between personas using real-time face generation technology, ensuring each response is delivered with the appropriate visual representation.
+**Latency Management**: Target response under 1.5 seconds during typical load. When processing exceeds this threshold, particle animation loops maintain engagement while displaying "The Oracle is considering..." status. Local fallback models activate during cloud service interruptions.
 
 ## Holographic Display Technology
 
