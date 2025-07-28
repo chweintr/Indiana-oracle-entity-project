@@ -189,4 +189,117 @@ This demo illustrates the core visual transformation of the Oracle Entity system
 - **Dissolution Effect**: The persona disperses back into neutral particle state
 - **Idle State**: Continuous ambient particle movement between interactions
 
+---
+
+## Recommended Implementation Updates
+
+*Based on recent technical discussions, here are key updates to consider for the implementation approach:*
+
+### 1. Simplified Technical Pipeline
+
+**States:**
+`IDLE → SUMMON → TALK → OUTRO (+ GLITCH when needed)`
+
+**TALK Options:**
+- FAQ match → instant prebaked clip playback (no processing)
+- Live response → Audio-amplitude particle modulation
+- Optional future: Lip-sync for photorealistic personas only
+
+**Particle Animation Pipeline:**
+- Base: Pre-rendered particle face videos (4/6/8/12s loops)
+- Enhancement: Real-time audio-reactive particle overlay
+- Mouth region responds to speech amplitude/frequency
+- Persona-specific particle behaviors (smoke, stars, data points)
+
+### 2. Technology Stack Additions
+
+**Add:**
+- Video generation tools (RunwayML, Pika, Stable Video)
+- Simplified playback options (Resolume/QLab)
+- WebSocket voice pipeline (replace button-based description)
+- Particle systems as primary character representation
+
+**Downplay:**
+- Heavy emphasis on Wav2Lip processing times
+- Complex facial landmark tracking
+
+### 3. Budget Reallocation
+
+**Reallocate:**
+- Less: "Wav2Lip optimization" → More: "Particle system development"
+- Less: "Facial tracking hardware" → More: "Premium projection equipment"
+- Add: "AI video generation tools subscription" (~$200/month)
+- Add: "Technical collaborator/TD" (part-time, 3-6 months)
+
+### 4. Updated Phase 1 Implementation
+
+**Months 1-2: Foundation**
+- Generate particle-based persona videos using AI tools
+- Implement WebSocket voice conversation pipeline
+- Set up simple video playback system (Resolume/QLab)
+- Expand FAQ library from visitor interactions
+
+### 5. Particle Design Language
+
+Each Oracle persona has a unique particle signature:
+
+#### Base System
+- Primary particles: Cyan/teal energy motes (#00CED1)
+- Accent particles: Golden wisdom sparks (#FFD700)
+- Behavior: Constant drift, responsive to breath and speech
+- Density: Variable based on audio amplitude and emotion
+
+#### Persona Signatures
+- **Vonnegut**: Cigarette smoke wisps, typewriter characters
+- **Indiana Sage**: Limestone dust, corn pollen
+- **Lil Bub**: Iridescent stars, rainbow shifts
+- **Kinsey**: Data points, graph elements
+- **Madame Walker**: Art Deco gold flourishes, hair product molecules
+- **Lettie Vance**: Fashion fabric swatches, pattern fragments
+
+### 6. Artistic Rationale
+
+**"Why Particles?"**
+
+Oracle entities manifest as living constellations of light particles rather than photorealistic faces. This aesthetic choice:
+- Creates a more magical, ethereal presence
+- Aligns with the "echoes" theme - memories as fragments
+- Is technically forgiving while allowing real-time audio reactivity
+- Suggests consciousness emerging from quantum possibility
+
+### 7. Simplified Response Times
+
+**Response Times:**
+- FAQ match: Instant (&lt;100ms)
+- Live generation: 2-3 seconds (masked by SUMMON animation)
+- Particle reactivity: Real-time (audio-driven)
+
+### 8. Updated Experience Description
+
+*Consider updating visitor-facing descriptions to:*
+
+"The Entity responds through directional speakers, their particle form pulsing and flowing with the rhythm of speech, occasionally coalescing into clearer features during profound moments"
+
+### 9. Collaboration Opportunities
+
+**Seeking Technical Collaborator:**
+- TouchDesigner/Resolume experience
+- Installation art background
+- Audio-reactive visual systems
+- Part-time, project-based (3-6 months)
+
+### 10. Simplified Technical Flow
+
+```
+Audio Input → Speech-to-Text → FAQ Matching/LLM
+     ↓                              ↓
+Particle Modulation ← Video Selection ← Response
+```
+
+**Key Insight:** Pre-rendered FAQ responses eliminate 80% of processing time, enabling instant playback of high-quality interactions. Only truly novel questions require live generation.
+
+### Implementation Notes
+
+The main goal: Shift the narrative from "complex technical challenge" to "artistic choice that happens to be technically smart." The particle approach isn't a compromise—it's a more magical solution than photorealism would be.
+
 </div>
