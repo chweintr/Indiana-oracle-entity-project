@@ -1,0 +1,166 @@
+---
+layout: '../layouts/BaseLayout.astro'
+title: 'Technical Notes — Echoes of Indiana'
+---
+
+import NavBar from '../components/NavBar.astro';
+
+<NavBar />
+
+<div class="max-w-4xl mx-auto px-4 py-16">
+
+# Technical Implementation Notes
+
+*Internal development documentation and pipeline specifications*
+
+---
+
+## Conversational Video Pipeline (Option 2 + Smart Clip Router)
+
+**Goal:** Real-time feeling, high visual fidelity. We mix pre-rendered "hero" clips with live lipsynced talk loops.
+
+### States
+`IDLE → SUMMON → TALK → OUTRO (+ GLITCH when needed)`
+
+- **IDLE** – 20–30 s loop: breathing/blinking head, slow particles.
+- **SUMMON** – 2–3 s burst: particles rush in, head forms on the bookend pose.
+- **TALK**
+  - **FAQ match** (prebaked clip: audio + video) → instant play.
+  - **Else live**: LLM → TTS → Wav2Lip-on-mouth over a neutral loop (4/6/8/12 s).
+- **OUTRO** – 1–2 s dissolve: head → particles → black.
+- **GLITCH** – 1 s loop: frozen frame + RGB offset/datamosh to cover stalls.
+
+### Clip Library (per persona)
+
+| Type            | Count | Lengths (s) | Notes                              |
+|-----------------|-------|-------------|-------------------------------------|
+| Idle loops      | 2–3   | 20–30       | Micro-motion only                   |
+| Talk bases      | 6–10  | 4/6/8/12    | Neutral face motion, bookend pose   |
+| Summons         | 2–3   | 2–3         | Particles → head                    |
+| Outros          | 2–3   | 1–2         | Head → particles                    |
+| Glitch masks    | 2–3   | 1 (loop)    | For >2 s latency spikes             |
+| Accent bursts   | 2–3   | 0.5–1       | Persona color/shape flourishes      |
+| FAQ hero clips  | 30–50 | variable    | Full animation + baked audio        |
+
+**Bookend pose:** Every clip starts/ends on the same still frame (12–16 frames) for clean cuts.
+
+### Router Logic (pseudo)
+
+```python
+q = transcribe(audio)
+vec = embed(q)
+hit = faiss.search(vec, top_k=1)
+
+if hit.score > 0.83 and cooldown_ok(hit.id):
+    play_clip(hit.clip_path)          # Prebaked FAQ
+else:
+    answer = llm(q, persona)
+    wav = tts(answer)
+    base = choose_loop(len(wav))       # 4/6/8/12 s
+    talk = wav2lip(base, wav, roi="mouth")
+    play_clip(talk)
+```
+
+### File Format
+
+- **Canvas:** 3840×2160, with a 2160×2160 square action-safe centered.
+- **Codec:** ProRes 4444 (alpha) or ProRes 422 HQ on black; HAP-Q in TouchDesigner.
+- **Blacks crushed to 0–2%.** Add light grain to kill banding.
+
+### Latency Budget
+
+- **STT + LLM + TTS:** ~0.4–0.7 s (fast path).
+- **Wav2Lip mouth pass:** ~2–3 s for 6–8 s chunk on a 4090.
+- **Mask anything above ~2 s** with GLITCH or "ruminating…" particle loop.
+
+### To-Do
+
+1. **Draft FAQ list + canonical answers** (30–50 per persona).
+2. **Generate particle packs and all state clips** (bookend pose locked).
+3. **Build router microservice** (embeddings + FAISS).
+4. **Integrate Wav2Lip/GeneFace++ ROI pipeline.**
+5. **Wire TouchDesigner/Resolume state machine** (OSC/HTTP triggers).
+6. **Test end-to-end latency,** add missing FAQs from logs.
+
+---
+
+## Development Pipeline Notes
+
+### Content Production Workflow
+
+**Asset Generation Priority:**
+1. Vonnegut persona pack (primary launch target)
+2. Default Oracle baseline interactions
+3. FAQ library expansion based on user logs
+
+**Technical Stack Integration:**
+- TouchDesigner for real-time compositing and state management
+- FAISS vector database for FAQ matching
+- Wav2Lip for real-time mouth synchronization
+- ProRes pipeline for maximum quality preservation
+
+### Performance Optimization
+
+**GPU Requirements:**
+- RTX 4090 or equivalent for real-time Wav2Lip processing
+- Dedicated VRAM allocation for clip buffering
+- Hardware-accelerated video decode/encode pipeline
+
+**Fallback Strategies:**
+- Pre-rendered FAQ clips eliminate processing delays
+- Glitch state masks technical limitations
+- Graceful degradation for lower-end hardware
+
+---
+
+## Integration Notes
+
+This pipeline connects to the main Pepper's Ghost installation described in the [implementation strategy](/implementation) and [technical specifications](/peppers-ghost-spec). The conversational system operates independently of the display technology choice, allowing flexibility in deployment scenarios.
+
+### Cross-Reference
+- [Full Implementation Strategy](/implementation)
+- [Pepper's Ghost Technical Specifications](/peppers-ghost-spec)
+- [Project Budget & Timeline](/budget)
+
+---
+
+## Clip Library JSON Schema
+
+Schema definition for the Oracle clip library system. This schema validates all clip metadata entries to ensure consistency across the content pipeline.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OracleClip",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "persona": { "type": "string" },
+    "type": { "type": "string", "enum": ["idle","summon","talk_base","outro","glitch","accent","faq"] },
+    "duration": { "type": "number" },
+    "emotion": { "type": "string" },
+    "path": { "type": "string" },
+    "bookend": { "type": "boolean", "default": true },
+    "cooldown": { "type": "number", "description": "seconds before reuse allowed" },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": ["id","persona","type","duration","path"]
+}
+```
+
+### Schema Usage
+
+This schema defines the structure for all video clips in the Oracle system:
+- **id**: Unique identifier for the clip
+- **persona**: Which Oracle persona (Vonnegut, Default, etc.)
+- **type**: Clip category matching state machine requirements
+- **duration**: Length in seconds
+- **emotion**: Optional emotional state for context-aware selection
+- **path**: File system or CDN path to video asset
+- **bookend**: Whether clip uses standard start/end frames for seamless transitions
+- **cooldown**: Minimum seconds before clip can be replayed
+- **tags**: Additional metadata for enhanced routing decisions
+
+The schema file is also available at [`/spec/clip_schema.json`](/spec/clip_schema.json) for direct integration with validation tools.
+
+</div>

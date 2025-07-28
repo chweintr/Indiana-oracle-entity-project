@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OracleClip",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "persona": { "type": "string" },
+    "type": { "type": "string", "enum": ["idle","summon","talk_base","outro","glitch","accent","faq"] },
+    "duration": { "type": "number" },
+    "emotion": { "type": "string" },
+    "path": { "type": "string" },
+    "bookend": { "type": "boolean", "default": true },
+    "cooldown": { "type": "number", "description": "seconds before reuse allowed" },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": ["id","persona","type","duration","path"]
+}
