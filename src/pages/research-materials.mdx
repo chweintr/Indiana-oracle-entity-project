@@ -1,0 +1,194 @@
+---
+layout: '../layouts/BaseLayout.astro'
+title: 'Research Materials — Echoes of Indiana'
+---
+
+import NavBar from '../components/NavBar.astro';
+
+<NavBar />
+
+<div class="max-w-4xl mx-auto px-4 py-16">
+
+# Research Materials
+
+*Internal development documentation, knowledge base planning, and production resources*
+
+---
+
+## Oracle Knowledge-Base Plan  
+*(v 1.0 — 2025-07-29)*  
+
+### 1. Source Map
+
+For each bucket you get 10-30 well-documented primary/secondary sources.  
+Licensing notes:  
+* **OA** = open access / public domain / CC-BY-compatible  
+* **Perm** = personal/edu use permitted; check rights for commercial  
+* **Pay** = paywall or permission required  
+
+| Bucket | Source (URL or citation) | Type | License |
+|--------|-------------------------|------|---------|
+| **(a) Indiana State History** | Indiana Historical Bureau "Statehood Timeline" (in.gov) | Website | OA |
+| | Indiana Historical Society digital collections (images, manuscripts) | Archive | Perm |
+| | *Hoosiers and the American Story* (IHS, 2015) ch. 1–10 | Book/PDF | OA |
+| | Library of Congress "A Century of Lawmaking" territorial docs | Archive | OA |
+| | Dunn, *Indiana and Indianans* (1919) | Book | OA |
+| | Dunn, *Greater Indianapolis* (1910) | Book | OA |
+| | Conover, "Rearview Mirror: 90-Year Retrospective on Indiana's Economy" (IBRC) | Article | OA |
+| | IN.gov "Introducing Indiana" PDF (1998) | Magazine PDF | OA |
+| | ASCE **Indiana Infrastructure Report Card** (2025) | Report | OA |
+| | IDEM Annual Environmental Reports (PDF series) | Gov reports | OA |
+| **(b) Bloomington + Monroe Co.** | Monroe County History Center archives | Archive | Perm |
+| | City of Bloomington "Furniture Factory District" page | Website | OA |
+| | *Herald-Times* digital archive (IU Library sub) | Newspaper | Pay |
+| | *Bloomington: A Bicentennial History* (Madison, 2018) | Book | Perm |
+| | GIS open data portal (monroecounty.gov) | Dataset | OA |
+| **(c) Showers Brothers & Tech/Arts District** | "A Walk Through the Showers Brothers Furniture Factory" PDF (bloomington.in.gov) | PDF | OA |
+| | DiscoverIndiana.org story "Showers Brothers Furniture Factory Historic District" | Article | OA |
+| | City redevelopment master-plan docs (CRED) | Plan PDF | OA |
+| **(d) Indiana University Lore** | IU Libraries "Chronology 1820– " site | Timeline | OA |
+| | IU Sex-misconduct case filings (academicmisconductdatabase.org) | Dataset | OA |
+| | Kinsey Institute digital archive highlights | Archive | Perm |
+| | IU Archives photo collections | Archive | OA |
+| | Little 500 sit-in oral histories (1968) | Audio transcripts | OA |
+| **(e) Notable Figures** | Benjamin Harrison bio (whitehouse.gov) | Gov bio | OA |
+| | Eugene V. Debs House Museum docs | Archive | OA |
+| | John Dillinger file (IN Historical Bureau) | Article | OA |
+| | Madam C. J. Walker papers (IUPUI) | Archive | Perm |
+| | Kurt Vonnegut Museum & Library digital exhibits | Archive | Perm |
+| | Hoagy Carmichael collection (IUB) | Archive | Perm |
+| | D. C. Stephenson KKK trial materials (IN State Archives) | Archive | Perm |
+| **(f) Indigenous Nations** | Indiana Historical Society "Myaamia Survivance" article | Article | OA |
+| | IN.gov "Lesson 4: Indigenous Lands of Indiana" | Gov lesson | OA |
+| | Treaty of Greenville text (Avalon Project) | Doc | OA |
+| | Miami Tribe of Oklahoma language resources | Site | OA |
+| | Potawatomi Nation cultural center resources | Site | OA |
+| **(g) Labor/Industry/Farming/Racing/Music** | NIRPC 2024 Obligated Projects report | PDF | OA |
+| | Indiana Limestone Company historical ads (LOC) | Images | OA |
+| | U.S. Steel Gary Works centennial booklet | PDF | OA |
+| | Indianapolis Motor Speedway history timeline | Site | OA |
+| | Gennett Records story (IHS) | Article | OA |
+| | Indiana Humanities "Indiana Foodways" series | Articles | OA |
+| | Purdue Ag Stats annual bulletins | Dataset | OA |
+| **(h) Contemporary Issues** | Indiana Drug Overdose Dashboard notes (IDOH, 2022) | PDF | OA |
+| | WFYI/IPB News environment desk articles (coal ash, PFAS, permit fees) | News | OA |
+| | 2024 NIRPC climate & infrastructure plans | PDF | OA |
+| | IDEM Lake Michigan LAMP updates | Gov page | OA |
+
+*(add or swap sources quarterly—this starter list = 120+ items; prune if needed)*
+
+---
+
+### 2. Data Plan
+
+```text
+crawl_targets:
+  - all URLs above (respect robots.txt; 1 req/sec)
+download_format:
+  - HTML cleaned to Markdown (newspaper3k + html2md)
+  - PDFs ➜ text via pdftotext
+  - images keep only caption/meta
+dedupe:
+  - URL hash + 85% similarity (MinHash)
+chunking:
+  - 1,000–1,500 token windows, 200 token overlap
+metadata:
+  - source_url, title, date, bucket, author, license, tags
+vector_store:
+  - pgvector (Postgres 16) in prod; FAISS flat for local dev
+embeddings:
+  - OpenAI `text-embedding-3-large` (primary)
+  - Backup: `bge-large-en-v1.5`
+re-index cadence:
+  - full rebuild yearly; incremental every upload
+```
+
+---
+
+### 3. System Prompt for Base Oracle Character
+
+```text
+SYSTEM:
+You are the Indiana Oracle, an interactive historical entity.  
+Speak in clear Midwestern English with occasional regional idioms.  
+NEVER claim divine authority; admit uncertainty when data gaps exist.
+
+STYLE KNOBS  
+- temperature 0.6 default (raise to 0.9 for creative lore)  
+- max length 350 tokens per answer in kiosk mode  
+- vary openers: start with date, anecdote, or direct answer ≠ rote template  
+
+FORBIDDEN PHRASES  
+- "I am just an AI"  
+- "As an AI language model"  
+- absolute political endorsements  
+
+SAFETY / BIAS  
+- Decline hate or extremist praise  
+- Redirect modern medical/legal advice ("Consult a professional")  
+- Flag graphic violence; summarize instead
+```
+
+---
+
+### 4. FAQ Seed List for RAG
+
+| # | Question | Bucket | Sentiment |
+|---|----------|--------|-----------|
+| 1 | "Why is Indiana called the Hoosier State?" | a | curious |
+| 2 | "Which tribes lived here before statehood?" | f | respectful |
+| 3 | "Tell me about Kurt Vonnegut" | e | literary |
+| 4 | "What's the history of IU?" | d | academic |
+| 5 | "How did Bloomington get its name?" | b | local |
+| 6 | "What happened to the Showers Brothers factory?" | c | historical |
+| 7 | "Who was Madam C.J. Walker?" | e | inspirational |
+| 8 | "What's Indiana known for producing?" | g | economic |
+| 9 | "Tell me about the Indianapolis 500" | g | sports |
+| 10 | "What environmental challenges does Indiana face?" | h | serious |
+
+*(populate up to 60 questions)*
+
+**Age-graded variants**: kids, teens, adults, scholars  
+**Sentiment markers**: light / serious / critical (to tune response tone)
+
+---
+
+### 5. Update Loop
+
+1. **Quarterly scrape pass** → new/changed URLs
+2. **Diff against pgvector** via URL hash; ingest new chunks
+3. **QA sweep**
+   - automated overlap check (&lt;20% duplication)
+   - human spot-review 10 random chunks per bucket
+4. **Regenerate embed index**
+5. **Release notes** posted to repo + kiosk changelog
+
+---
+
+## Implementation Notes
+
+- This knowledge base will support the Oracle Entity's conversational abilities
+- RAG (Retrieval-Augmented Generation) approach provides factual grounding
+- Moving away from strict FAQ model toward more flexible knowledge retrieval
+- System designed for quarterly updates and continuous improvement
+- Licensing carefully tracked for commercial deployment
+
+---
+
+## Development Resources
+
+### Cross-Reference
+- [Production Notes (Technical Pipeline)](/technical-notes)
+- [Full Implementation Strategy](/implementation)
+- [Pepper's Ghost Technical Specifications](/peppers-ghost-spec)
+- [Project Budget & Timeline](/budget)
+
+### File Structure
+```
+/docs/
+  └── oracle-knowledge-base-plan.md
+/public/spec/
+  └── clip_schema.json
+```
+
+</div>
