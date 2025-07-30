@@ -5,9 +5,9 @@
   #heygen-streaming-embed {
     z-index: 9999;
     position: fixed;
-    left: 50%;
-    bottom: 120px;
-    transform: translateX(-50%);
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -23,15 +23,24 @@
     max-width: 90vw;
     border: 0;
     border-radius: 12px;
-    bottom: 20px;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
   }
   
   @media (max-width: 640px) {
+    #heygen-streaming-embed {
+      right: 10px;
+      width: 150px;
+      height: 150px;
+    }
+    
     #heygen-streaming-embed.expand {
       height: 300px;
       width: 95%;
-      left: 50%;
-      transform: translateX(-50%);
+      right: 2.5%;
+      left: 2.5%;
+      transform: translateY(-50%);
     }
   }
   
