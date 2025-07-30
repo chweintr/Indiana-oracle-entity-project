@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Hold a conversation with Indiana's past, present, and possible futures."><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title></title><link rel="stylesheet" href="/_astro/budget.Bc6FbFMl.css"></head> <body class="bg-brand-navy text-white font-sans"> <nav class="sticky top-0 z-50 bg-brand-navy/90 backdrop-blur-sm border-b border-brand-teal/20"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex justify-between items-center h-16"> <div class="flex items-center"> <a href="/" class="text-brand-teal text-xl font-bold hover:text-brand-magenta transition-colors">
+Echoes of Indiana
+</a> </div> <div class="hidden md:block"> <div class="ml-10 flex items-baseline space-x-4"> <a href="/" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a> <a href="/experience" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Experience</a> <a href="/personas" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Personas</a> <a href="/tech" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Tech</a> <a href="/implementation" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Implementation</a> <a href="/peppers-ghost-spec" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">PG Spec</a> <a href="/budget" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Budget</a> <a href="/impact" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Impact</a> <a href="/contact" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a> <a href="/technical-notes" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Production Notes</a> <a href="/research-materials" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Research</a> </div> </div> </div> </div> </nav>
+<div class="max-w-4xl mx-auto px-4 py-16"><h1 id="peppers-ghost-install-spec">Pepper’s Ghost Install Spec</h1><h2 id="what-this-is">What this is</h2><p>Large Pepper’s Ghost “hologram” of a talking head, driven by real-time AI. Projection onto a 45° foil/glass plane inside a dark cavity.</p><hr/><h2 id="room--build-requirements">Room &amp; Build Requirements</h2><p><strong>Footprint</strong></p><ul>
+<li>Foil plane: <strong>14 ft W × 9 ft H</strong> @ 45° (visible image 8 ft × 8 ft)</li>
+<li>Projection bay (behind/under foil): <strong>6 ft</strong> deep (projector + service)</li>
+<li>Viewer stand-off: <strong>8 ft</strong> minimum, 6 ft absolute minimum (rail or floor marker)</li>
+<li>Viewer eye height: <strong>5 ft 6 in</strong> design standard</li>
+<li>Platform build-up: <strong>24 in</strong> OR 24–36 in recess option</li>
+<li>Total depth reserved in atrium: <strong>≈20–22 ft</strong> (foil to viewer rail)</li>
+<li>Ceiling clear height: <strong>≥ 11 ft</strong> (foil frame + lighting)</li>
+</ul><p><strong>Surfaces</strong></p><ul>
+<li>Projection bay walls, floor, ceiling: matte black (velvet/DarkMat). No stray light.</li>
+<li><strong>Mask wall:</strong> 2–2.5 ft high, matte black, blocks ground screen sightlines</li>
+<li><strong>Blackout zone:</strong> spill baffles and light control around installation</li>
+<li>Service access: rear or side door large enough for projector/computer swap.</li>
+</ul><p><strong>Lighting</strong></p><ul>
+<li>Ambient at foil plane: <strong>≤ 50 lux</strong> (requires baffles/drapes in typical 200+ lux atriums)</li>
+<li>Independent dimming zone or architectural hood over installation bay</li>
+<li>Site modifications may include strategic positioning away from skylights/windows</li>
+<li>DMX or Hue-capable circuits for synced accent lights (never spill on the foil)</li>
+<li>Spot fixtures for physical props inside the vitrine (aimed away from foil)</li>
+<li>Alternative: Higher-lumen projectors (15-20k) if ambient light cannot be controlled</li>
+<li><strong>Throw path:</strong> projector → ground screen → foil → viewer</li>
+</ul><p><strong>Power &amp; HVAC</strong></p><ul>
+<li>Electrical: 30-40A dedicated circuits (dual 10k-lumen projectors draw ~2kW combined + workstation)</li>
+<li>UPS/Power conditioning recommended for clean power delivery</li>
+<li>HVAC: no vents blowing across foil; keep temp 68–75 °F. Dedicated return airflow for projector heat</li>
+<li>Emergency power consideration for graceful shutdown during outages</li>
+</ul><p><strong>Network &amp; Cabling</strong></p><ul>
+<li>2 × Cat6 to rack (NDI/control).</li>
+<li>SDI or DisplayPort-rated run to projector (avoid long HDMI).</li>
+<li>Local ethernet switch near workstation.</li>
+</ul><p><strong>Noise</strong></p><ul>
+<li>Keep HVAC and ambient noise low in viewer zone. Projector is isolated in bay.</li>
+</ul><hr/><h2 id="projection-package">Projection Package</h2><ul>
+<li>Laser projector, <strong>10–12K lumens</strong> (Epson Pro L1200U + ELPLU03S or Panasonic PT-RZ990 + ET-DLE060)</li>
+<li>Lens shift ±50% V / ±20% H for flexible positioning</li>
+<li>Short-throw (~0.8:1) with generous lens shift capabilities</li>
+<li>Option: dual blended projectors for brightness and failover</li>
+<li>Rated for 24/7 or “museum mode”. Plan idle/dim state when no visitors</li>
+<li>Black background content (render on #000000) for clean reflections</li>
+<li><strong>Latency budget:</strong> &lt; 700 ms total system response</li>
+</ul><hr/><h2 id="ops--maintenance">Ops &amp; Maintenance</h2><ul>
+<li>Daily runtime: 8–12 hours. Dim/idle when idle.</li>
+<li>Clean projector filters (or use filter-free units). Log hours; swap before dimming becomes obvious.</li>
+<li>Foil/glass: anti-static microfiber, no ammonia. Quick-swap foil frame system. Watch for wrinkles, drafts.</li>
+<li>Watchdog script on media server for auto-restart. Remote reboot access.</li>
+</ul><p><strong>Maintenance Contract</strong>: Quarterly service visits including spare parts inventory (replacement foil, lamp modules, filters). Staff training on basic diagnostics, cleaning procedures, and emergency shutdown protocols. Remote monitoring system for projector health and system performance.</p><hr/><h2 id="alternatives-if-projection-depth-or-light-control-is-denied">Alternatives (if projection depth or light control is denied)</h2><ul>
+<li><strong>Screen Reflection (OLED/LCD at 45°):</strong> shallower, easier alignment, weaker blacks/brightness.</li>
+<li><strong>Transparent OLED stack:</strong> sleek, but contrast suffers in bright lobbies.</li>
+<li><strong>Looking Glass light-field:</strong> true parallax, heavy GPU load, fixed cone.</li>
+<li><strong>HYPERVSN:</strong> good teaser near entrance, not primary head (fan noise, limited nuance).</li>
+<li><strong>Fog/mist screen:</strong> effect layer only; high maintenance.</li>
+</ul><hr/><h2 id="downloadables--hand-offs">Downloadables / Hand-offs</h2><ul>
+<li>One-page PDF (plan + section + spec)</li>
+<li>DXF/SVG schematic for GC/AV teams</li>
+<li>JSON param block for regenerating CAD quickly</li>
+</ul><div class="my-6 p-4 bg-brand-navy/30 rounded-lg border border-brand-teal/20"><h4 class="text-brand-teal font-bold mb-2">Available Downloads</h4><a href="/docs/pepper_ghost_dimensions.csv" download="true" class="inline-flex items-center px-4 py-2 bg-brand-amber text-brand-navy font-medium rounded hover:bg-brand-magenta transition-colors"><p>📊 Dimensional Specifications (CSV)</p></a><p class="text-sm text-gray-400 mt-2"><p>Complete dimensional data for construction planning and vendor coordination</p></p></div><p><em>(Additional engineering drawings available once final dimensions are confirmed.)</em></p><hr/><h2 id="visual-implementation-examples">Visual Implementation Examples</h2><div class="grid md:grid-cols-2 gap-8 my-8"><div><img src="/images/fixed2.png" alt="Pepper's Ghost installation showing clean holographic Oracle figure floating in viewing chamber" class="w-full rounded-lg shadow-lg"/><p class="text-center text-sm text-gray-400 mt-2"><p><strong>Installation Result</strong> — Clean holographic appearance with Oracle projection at proper viewing angle</p></p></div><div><img src="/images/correct.png" alt="Cross-section diagram showing correct Pepper's Ghost geometry: viewer and ground screen on same side of foil, virtual image behind foil" class="w-full rounded-lg shadow-lg"/><p class="text-center text-sm text-gray-400 mt-2"><p><strong>Correct Geometry</strong> — Side view showing proper setup: viewer → mask wall + pit → foil → virtual image</p></p></div></div><div class="grid md:grid-cols-2 gap-8 my-8"><div><img src="/images/fixed3.png" alt="Pepper's Ghost installation in gallery setting showing visitor interaction with holographic Oracle figure" class="w-full rounded-lg shadow-lg"/><p class="text-center text-sm text-gray-400 mt-2"><p><strong>Gallery Installation</strong> — Visitor experience with holographic Oracle in museum environment</p></p></div><div><img src="/images/pepper_ghost_setup.png" alt="Corrected Pepper's Ghost side section showing proper geometry: viewer and ground screen on same side of foil" class="w-full rounded-lg shadow-lg"/><p class="text-center text-sm text-gray-400 mt-2"><p><strong>Technical Side Section</strong> — Correct geometry with proper component placement</p></p></div></div><h2 id="technical-diagram">Technical Diagram</h2><div class="my-8"><img src="/images/pg_section_new.svg" alt="Updated Pepper's Ghost cross-section showing 14ft×9ft foil plane, 8ft×8ft visible image, mask wall, viewer sightlines, and projection path" class="w-full max-w-4xl mx-auto rounded-lg shadow-lg bg-white"/><p class="text-center text-sm text-gray-400 mt-2"><p><strong>Updated Cross-section:</strong> 14 ft × 9 ft foil plane, 8 ft × 8 ft visible image, mask wall, blackout zone</p></p></div><hr/><h2 id="cad-agent-prompt-for-claudegpt-cad-tools">CAD Agent Prompt (for Claude/GPT CAD tools)</h2><pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>Task: Produce a dimensioned 2D schematic (plan + side section) for a Pepper&#39;s Ghost vitrine. Output DXF (and SVG) with layers.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Layers:</span></span>
+<span class="line"><span>  L_VIEWER, L_FOIL, L_PROJECTOR, L_CAVITY, L_LIGHT, L_DIM, L_CENTERLINE</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Params (edit if needed):</span></span>
+<span class="line"><span>image_width_ft = 8</span></span>
+<span class="line"><span>image_height_ft = 8</span></span>
+<span class="line"><span>foil_angle_deg = 45</span></span>
+<span class="line"><span>viewer_standoff_ft = 8</span></span>
+<span class="line"><span>projection_depth_ft = 6</span></span>
+<span class="line"><span>vitrine_width_ft = 14</span></span>
+<span class="line"><span>ambient_lux_max = 50</span></span>
+<span class="line"><span>ceiling_clear_ft = 11</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Rules:</span></span>
+<span class="line"><span>- Units: feet/inches in labels.</span></span>
+<span class="line"><span>- Foil at 45°, centered in 10 ft opening.</span></span>
+<span class="line"><span>- Draw projector icon + throw path inside 6 ft cavity.</span></span>
+<span class="line"><span>- Viewer zone rectangle at 8 ft.</span></span>
+<span class="line"><span>- Place light symbols above foil.</span></span>
+<span class="line"><span>- All dims + callouts on L_DIM.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Deliver:</span></span>
+<span class="line"><span>1) DXF with correct layers</span></span>
+<span class="line"><span>2) SVG (no raster)</span></span>
+<span class="line"><span>3) Table (JSON) of all critical dims and coordinates</span></span>
+<span class="line"><span></span></span></code></pre><pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;image_width_ft&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">8.0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;image_height_ft&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">8.0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;foil_plane_width_ft&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">14.0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;foil_plane_height_ft&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">9.0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;foil_angle_deg&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">45</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;viewer_standoff_ft&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">8.0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;viewer_min_standoff_ft&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">6.0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;platform_height_in&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">24</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;pit_depth_in&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">24</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;mask_wall_height_ft&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">2.25</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;projection_depth_ft&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">6.0</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;ambient_lux_max&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;ceiling_clear_ft&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">11.0</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre><hr/><h2 id="to-do-before-construction-drawings">To-Do Before Construction Drawings</h2><ul>
+<li>Confirm final image size and head scale.</li>
+<li>Confirm projector make/model (or lumen target).</li>
+<li>Verify route for service access (door size, lift).</li>
+<li>Decide on idle/detection logic (sensor or schedule).</li>
+<li>Lock lighting circuit and control protocol (DMX vs Hue).</li>
+<li>Decide if a teaser (HYPERVSN/LED sign) is part of scope.</li>
+</ul><hr/><h2 id="content-layering-strategy">Content Layering Strategy</h2><p><strong>Visual Depth Architecture</strong> (front → back):</p><ol>
+<li><strong>Floaties / Smoke Loop</strong> — Long, semi-random ambient particles</li>
+<li><strong>Talking Head Feed</strong> — Mostly stable avatar with micro-motion</li>
+<li><strong>Persona-Specific Particles</strong> — Character threads (e.g., Vonnegut curls) tied to sentiment</li>
+<li><strong>Faux Interior Plate</strong> — Dark volumetric cube or shallow “room” render, &lt;20% luminance</li>
+<li><strong>Pure Black Beyond</strong> — Complete darkness for maximum contrast</li>
+</ol><p><strong>Glitch Layer Protocol</strong>: When latency spikes exceed 700ms, freeze last frame, apply RGB offset/datamosh filter, then fade back to live feed.</p><p><strong>Throw Path</strong>: projector → ground screen → foil → viewer</p><p><strong>Registration</strong>: All clips and live feed share the same frame, head position, and scale. Build a hidden guides layer for alignment, then crop/black it out.</p><hr/><h2 id="viewpoint-control-strategy">Viewpoint Control Strategy</h2><p><strong>Design Constraints:</strong></p><ul>
+<li>Optimized for one “hero” viewing zone: 8 ft standoff, 5’6” eye height</li>
+<li>Rail or subtle floor marker keeps visitors where illusion holds</li>
+<li>Off-axis views acceptable but depth flattens—this is expected behavior</li>
+</ul><p><strong>Visitor Flow Management:</strong></p><ul>
+<li>Entry approach from left/right to avoid blocking projection path</li>
+<li>10-second silence or 1-meter lateral movement releases microphone</li>
+<li>Queue management prevents crowding in optimal viewing zone</li>
+</ul><hr/><h2 id="implementation-work-plan">Implementation Work Plan</h2><h3 id="state-machine-design">State Machine Design</h3><p><strong>IDLE → SUMMON → LIVE TALK → OUTRO</strong> (with GLITCH as needed)</p><ul>
+<li><strong>IDLE</strong>: Ambient floaties, occasional “presence” indicators</li>
+<li><strong>SUMMON</strong>: Particle coalescence, persona materialization (3-5 seconds)</li>
+<li><strong>LIVE TALK</strong>: Active conversation with full layering system</li>
+<li><strong>OUTRO</strong>: Graceful particle dissolution, return to idle state</li>
+<li><strong>GLITCH</strong>: Emergency fallback during system lag or API failures</li>
+</ul><h3 id="content-production-pipeline">Content Production Pipeline</h3><p><strong>Persona Packs</strong> (priority order):</p><ol>
+<li><strong>Vonnegut</strong> — Primary celebrity persona with estate approval</li>
+<li><strong>Default Oracle</strong> — Foundational Indiana Sage for all visitors</li>
+<li><strong>Lil Bub</strong> — If budget and technical requirements allow</li>
+</ol><p><strong>Per-Persona Assets:</strong></p><ul>
+<li>Idle loop animations</li>
+<li>Summon/materialization sequence</li>
+<li>Outro/dissolution sequence</li>
+<li>Character-specific floatie patterns</li>
+<li>Sentiment-reactive particle systems</li>
+</ul><h3 id="implementation-steps">Implementation Steps</h3><ol>
+<li><strong>Order foil, truss, projector, media server</strong> — confirm lead times and delivery coordination</li>
+<li><strong>Fabricate platform or excavate pit</strong> — 24 in build-up OR 24-36 in recess option</li>
+<li><strong>Hang foil frame at 45°</strong> — tensioned system with quick-release maintenance access</li>
+<li><strong>Install ground screen/projector</strong> — focus with lens shift (no digital warp)</li>
+<li><strong>Light plot focusing and lux check</strong> — verify ≤50 lux at foil plane</li>
+<li><strong>Content test</strong> — grayscale ramp → contrast → particle-head clip</li>
+<li><strong>Commissioning checklist and sign-off</strong> — full system verification</li>
+</ol><h3 id="technical-implementation-checklist">Technical Implementation Checklist</h3><ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Create faux cube plate</strong> — reusable across personas, recolor as needed</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Specify mask wall</strong> — 2-2.5 ft high in construction drawings</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Design blackout baffles</strong> — architectural light control system</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Decide platform vs pit</strong> — 24 in up OR 24-36 in down (affects all other dimensions)</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Confirm projector path</strong> — locks framing and ventilation requirements for fabricator</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Test content pipeline</strong> — TouchDesigner/Unreal Engine to projection system</li>
+<li class="task-list-item"><input type="checkbox" disabled/> <strong>Calibrate viewpoint</strong> — optimize for 5’6” eye height at 8 ft standoff</li>
+</ul><hr/><h2 id="connection-to-indiana-heritage">Connection to Indiana Heritage</h2><p>The Oracle’s spectral presence — rendered through precision optics and theatrical lighting — echoes Bloomington’s manufacturing past. From RCA’s electronics assembly lines to the Showers Brothers’ furniture craftsmanship, the installation draws on Indiana’s tradition of making technology accessible. The limestone-clad walls of IU’s campus and the precision engineering at Crane Naval Base find new expression in this convergence of projection, computation, and regional memory.</p><hr/><div class="text-xs text-gray-500 mt-8"><p><strong>Note:</strong> iPad compatibility issues identified with Lil Bub video playback and Gantt chart rendering. Consider alternative video embed methods and static images for mobile Safari compatibility.</p></div></div> </body></html>

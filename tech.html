@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="description" content="Hold a conversation with Indiana's past, present, and possible futures."><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><title></title><link rel="stylesheet" href="/_astro/budget.Bc6FbFMl.css"></head> <body class="bg-brand-navy text-white font-sans"> <nav class="sticky top-0 z-50 bg-brand-navy/90 backdrop-blur-sm border-b border-brand-teal/20"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex justify-between items-center h-16"> <div class="flex items-center"> <a href="/" class="text-brand-teal text-xl font-bold hover:text-brand-magenta transition-colors">
+Echoes of Indiana
+</a> </div> <div class="hidden md:block"> <div class="ml-10 flex items-baseline space-x-4"> <a href="/" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a> <a href="/experience" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Experience</a> <a href="/personas" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Personas</a> <a href="/tech" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Tech</a> <a href="/implementation" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Implementation</a> <a href="/peppers-ghost-spec" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">PG Spec</a> <a href="/budget" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Budget</a> <a href="/impact" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Impact</a> <a href="/contact" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a> <a href="/technical-notes" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Production Notes</a> <a href="/research-materials" class="text-white hover:text-brand-teal px-3 py-2 rounded-md text-sm font-medium transition-colors">Research</a> </div> </div> </div> </div> </nav>
+<div class="max-w-6xl mx-auto px-4 py-16"><h1 id="technical-architecture">Technical Architecture</h1><div class="grid md:grid-cols-2 gap-12 mb-16"><div><h2 id="rag-pipeline">RAG Pipeline</h2><pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:#E1E4E8">sequenceDiagram</span></span>
+<span class="line"><span style="color:#E1E4E8">    participant V as Visitor</span></span>
+<span class="line"><span style="color:#E1E4E8">    participant M as Microphone</span></span>
+<span class="line"><span style="color:#E1E4E8">    participant W as Whisper ASR</span></span>
+<span class="line"><span style="color:#E1E4E8">    participant Q as Qdrant Vector DB</span></span>
+<span class="line"><span style="color:#E1E4E8">    participant G as GPT-4o (Groq)</span></span>
+<span class="line"><span style="color:#E1E4E8">    participant E as ElevenLabs TTS</span></span>
+<span class="line"><span style="color:#E1E4E8">    participant A as Avatar Display</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    V-&gt;&gt;M: Speaks question</span></span>
+<span class="line"><span style="color:#E1E4E8">    M-&gt;&gt;W: Audio stream</span></span>
+<span class="line"><span style="color:#E1E4E8">    W-&gt;&gt;Q: Query embedding</span></span>
+<span class="line"><span style="color:#E1E4E8">    Q-&gt;&gt;G: Retrieved context + query</span></span>
+<span class="line"><span style="color:#E1E4E8">    G-&gt;&gt;E: Response text</span></span>
+<span class="line"><span style="color:#E1E4E8">    E-&gt;&gt;A: Synthesized speech + morph</span></span>
+<span class="line"><span style="color:#E1E4E8">    A-&gt;&gt;V: Persona response</span></span>
+<span class="line"></span></code></pre></div><div><h2 id="performance-metrics">Performance Metrics</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Layer</th><th>Component</th><th>Spec</th><th>Latency (ms)</th></tr></thead><tbody><tr><td>Capture</td><td>ClearOne BMA-CT</td><td>12° beam, −48 dB noise floor</td><td>&lt;10</td></tr><tr><td>Vision</td><td>Intel RealSense D435</td><td>90 fps depth</td><td>&lt;10</td></tr><tr><td>ASR</td><td>OpenAI Whisper-tiny</td><td>Local processing</td><td>120</td></tr><tr><td>Inference</td><td>GPT-4o 32k on Groq LPU</td><td>RAG prompt</td><td>250–400</td></tr><tr><td>TTS</td><td>ElevenLabs</td><td>22050 Hz synthesis</td><td>350</td></tr><tr><td>Avatar mouth</td><td>HeyGen live-talk</td><td>Real-time sync</td><td>60</td></tr><tr><td><strong>Total</strong></td><td></td><td></td><td><strong>target &lt; 1.5s</strong></td></tr></tbody></table></div></div><h2 id="voice-synthesis--persona-morphing">Voice Synthesis &amp; Persona Morphing</h2><p>Our AI system leverages ElevenLabs’ advanced voice cloning technology to recreate the authentic speech patterns of each Indiana persona. Historical recordings, when available, are used to train persona-specific voice models. For figures without recorded speech, we employ linguistic analysis of their written works combined with regional accent modeling to create plausible voice representations.</p><h3 id="fallback-strategy">Fallback Strategy</h3><ul>
+<li><strong>Primary</strong>: ElevenLabs custom voice models</li>
+<li><strong>Secondary</strong>: Neural voice synthesis with persona-tuned parameters</li>
+<li><strong>Tertiary</strong>: High-quality text-to-speech with accent modification</li>
+<li><strong>Emergency</strong>: Local model responses with pre-recorded audio during API outages</li>
+</ul><p><strong>Latency Management</strong>: Target response under 1.5 seconds during typical load. When processing exceeds this threshold, particle animation loops maintain engagement while displaying “The Oracle is considering…” status. Local fallback models activate during cloud service interruptions.</p><h2 id="oracle-state-machine">Oracle State Machine</h2><p>The Oracle operates through a carefully orchestrated state system designed for seamless visitor interaction:</p><pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:#E1E4E8">stateDiagram-v2</span></span>
+<span class="line"><span style="color:#E1E4E8">    [*] --&gt; IDLE</span></span>
+<span class="line"><span style="color:#E1E4E8">    IDLE --&gt; SUMMON : Motion Detected</span></span>
+<span class="line"><span style="color:#E1E4E8">    SUMMON --&gt; LIVE_TALK : Voice Input</span></span>
+<span class="line"><span style="color:#E1E4E8">    LIVE_TALK --&gt; LIVE_TALK : Conversation</span></span>
+<span class="line"><span style="color:#E1E4E8">    LIVE_TALK --&gt; OUTRO : Silence (10s)</span></span>
+<span class="line"><span style="color:#E1E4E8">    LIVE_TALK --&gt; GLITCH : Latency &gt; 700ms</span></span>
+<span class="line"><span style="color:#E1E4E8">    GLITCH --&gt; LIVE_TALK : Recovery</span></span>
+<span class="line"><span style="color:#E1E4E8">    OUTRO --&gt; IDLE : Complete</span></span>
+<span class="line"><span style="color:#E1E4E8">    SUMMON --&gt; IDLE : Timeout (30s)</span></span>
+<span class="line"></span></code></pre><p><strong>State Descriptions:</strong></p><ul>
+<li><strong>IDLE</strong>: Ambient particle field, subtle presence indicators, motion detection active</li>
+<li><strong>SUMMON</strong>: Particle coalescence, persona materialization (3-5 second sequence)</li>
+<li><strong>LIVE_TALK</strong>: Full conversation mode with layered visual system and real-time responses</li>
+<li><strong>OUTRO</strong>: Graceful dissolution, persona-specific farewell animation</li>
+<li><strong>GLITCH</strong>: Emergency visual state during API failures or processing delays</li>
+</ul><h2 id="content-pipeline-architecture">Content Pipeline Architecture</h2><p><strong>Real-Time Rendering Stack:</strong></p><ol>
+<li><strong>Audio Input</strong> → Whisper ASR → conversation state</li>
+<li><strong>LLM Processing</strong> → character-specific response generation</li>
+<li><strong>TTS Synthesis</strong> → ElevenLabs voice cloning with persona parameters</li>
+<li><strong>Visual Composition</strong> → TouchDesigner/Unreal Engine real-time layering</li>
+<li><strong>Display Output</strong> → Calibrated projection or holographic display</li>
+</ol><p><strong>Visual Layer Management:</strong></p><ul>
+<li><strong>Layer 1</strong>: Environmental particles (always active)</li>
+<li><strong>Layer 2</strong>: Avatar/head (conversation-driven)</li>
+<li><strong>Layer 3</strong>: Persona particles (sentiment-reactive)</li>
+<li><strong>Layer 4</strong>: Spatial context (faux interior geometry)</li>
+<li><strong>Layer 5</strong>: Background void (pure black for contrast)</li>
+</ul><p><strong>Failsafe Systems:</strong>
+When cloud services lag, the system transitions to cached responses with “thinking” animations until connectivity restores. Local TTS provides basic functionality during extended outages.</p><h2 id="holographic-display-technology">Holographic Display Technology</h2><h3 id="peppers-ghost-implementation">Pepper’s Ghost Implementation</h3><p>Our primary display approach uses advanced Pepper’s Ghost illusion technology, creating convincing 3D presence without requiring special glasses:</p><ul>
+<li><strong>Reflective Medium</strong>: Metallised polyethylene foil (97% transmittance, 20% reflectance) or professional Hologauze mesh</li>
+<li><strong>Projection System</strong>: 10-12k lumen short-throw laser projectors (Epson Pro L1200U + ELPLU03S or Panasonic PT-RZ990 + ET-DLE060)</li>
+<li><strong>Geometry</strong>: 14 ft × 9 ft foil plane @ 45°, 8 ft × 8 ft visible image, 8 ft viewer standoff (6 ft minimum)</li>
+<li><strong>Environmental Control</strong>: ≤50 lux ambient lighting at foil plane with blackout baffles</li>
+<li><strong>Media Pipeline</strong>: Real-time rendering via TouchDesigner/Unreal Engine with &lt;700ms latency budget</li>
+</ul><h3 id="alternative-display-options">Alternative Display Options</h3><p><strong>Light-Field Technology</strong>: Looking Glass displays provide true parallax viewing for multiple simultaneous viewers (32”-65” units, $15K-$45K hardware cost).</p><p><strong>Transparent OLED</strong>: Layered glass configuration allows see-through effects with particle depth layers (55” FHD panels, ~$16K per unit).</p><p><strong>Volumetric Projection</strong>: Proto hologram units for reliable 3D presence in premium installations.</p><h2 id="hardware-specifications">Hardware Specifications</h2><h3 id="core-computing">Core Computing</h3><ul>
+<li><strong>AI Processing</strong>: NVIDIA RTX 4090 GPU cluster for real-time inference</li>
+<li><strong>Media Server</strong>: TouchDesigner Pro or Unreal Engine for holographic rendering</li>
+<li><strong>Audio</strong>: ClearOne BMA-CT directional beam microphone array</li>
+<li><strong>Storage</strong>: 2TB NVMe SSD for vector database and media assets</li>
+<li><strong>Network</strong>: Gigabit fiber connection for cloud AI services</li>
+</ul><h3 id="display-infrastructure">Display Infrastructure</h3><ul>
+<li><strong>Primary</strong>: 10-12k lumen short-throw laser projector</li>
+<li><strong>Holographic Medium</strong>: Professional-grade reflective film or Hologauze</li>
+<li><strong>Environmental</strong>: DMX lighting control and ambient light management</li>
+<li><strong>Mounting</strong>: Tensioned frame system with quick-release maintenance access</li>
+</ul><div class="mt-12 p-6 bg-brand-navy/30 rounded-lg border border-brand-teal/20"><h3 class="text-brand-teal text-xl font-bold mb-4">Technical Documentation</h3><p class="text-gray-300 mb-4"><p>Download the complete Bill of Materials and technical specifications for implementation.</p></p><a href="/docs/bom.xlsx" download="true" class="inline-flex items-center px-4 py-2 bg-brand-amber text-brand-navy font-medium rounded hover:bg-brand-magenta transition-colors"><p>📄 Download BOM.xlsx</p></a></div><h2 id="visual-design-language">Visual Design Language</h2><div class="my-8"><div class="max-w-md mx-auto"><div class="aspect-[9/16] rounded-lg overflow-hidden shadow-lg bg-black"><iframe src="https://www.youtube.com/embed/52XGW11caQQ?autoplay=1&mute=1&loop=1&playlist=52XGW11caQQ&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1" class="w-full h-full" style="border: none;" allow="autoplay; encrypted-media" allowfullscreen></iframe></div></div><p class="text-center text-sm text-gray-400 mt-4"><p><strong>Promotional Visual Language</strong> — Art Deco meets digital futurism</p></p></div><p>While the Oracle entities will appear as monochromatic, spectral forms — smoky particles and digital glitches bridging past and future — the promotional materials work in a related but distinct style. They lean on Art Deco geometry, vintage electrical motifs, and kinetic motion typography to shape an “old-meets-new” aesthetic for campaign pieces and adjacent projects.</p><p>Letterforms assemble and dismantle with machine-like precision, a gesture toward temporal echoes and a nod to Indiana’s manufacturing and craft traditions — from RCA’s years in Bloomington to the makers and tradespeople of the Showers district. The imagery borrows from moments when technology felt theatrical and full of promise — the polish of Deco, the spark of early electronics, and the speculative tone of classic sci-fi — and ties that sensibility to the state’s universities, notably IU in Bloomington, as well as Notre Dame and other research centers. Together, these elements create a visual language that connects industrial history, design heritage, and a sense of forward momentum.</p><h2 id="risk-assessment--mitigation">Risk Assessment &amp; Mitigation</h2><h3 id="technical-risks">Technical Risks</h3><ul>
+<li><strong>Cloud Dependency</strong>: Local model fallbacks and response caching</li>
+<li><strong>Integration Complexity</strong>: Modular design with well-defined APIs</li>
+<li><strong>Voice Recognition</strong>: Push-to-talk systems and noise cancellation</li>
+<li><strong>Content Accuracy</strong>: Historian verification and fact databases</li>
+</ul><h3 id="operational-risks">Operational Risks</h3><ul>
+<li><strong>Public Environment</strong>: Robust hardware and remote monitoring</li>
+<li><strong>Maintenance</strong>: Comprehensive documentation and staff training</li>
+<li><strong>Technology Evolution</strong>: Regular upgrade pathways and compatibility</li>
+<li><strong>Funding Sustainability</strong>: Multiple revenue streams and partnerships</li>
+</ul><h3 id="quality-assurance">Quality Assurance</h3><ul>
+<li><strong>Historical Accuracy</strong>: Community advisory panels and expert review</li>
+<li><strong>Cultural Sensitivity</strong>: Descendant community input where possible</li>
+<li><strong>Technical Reliability</strong>: Extensive testing and failsafe mechanisms</li>
+<li><strong>User Experience</strong>: Iterative design based on visitor feedback</li>
+</ul></div> </body></html>
