@@ -17,7 +17,7 @@ Have questions about the Oracle Entity Project? Chat directly with Virtual Caleb
 <div class="text-center my-12">
   <div class="bg-gradient-to-r from-brand-teal/20 to-brand-magenta/20 rounded-lg p-8 border border-brand-teal/30">
     <h3 class="text-2xl font-bold mb-4 text-brand-teal">Start Your Conversation</h3>
-    <p class="text-lg mb-6">Virtual Caleb appears to the right and is ready to answer your questions about bringing Indiana's historical figures to life through holographic AI.</p>
+    <p class="text-lg mb-6">Virtual Caleb appears on the left and is ready to answer your questions about bringing Indiana's historical figures to life through holographic AI.</p>
     <div class="text-sm text-gray-400">
       <p>💬 Click the avatar to start chatting</p>
       <p>🎤 Use voice to ask your questions</p>
@@ -25,8 +25,12 @@ Have questions about the Oracle Entity Project? Chat directly with Virtual Caleb
       <p>📋 Get technical replies about the project</p>
     </div>
     <div class="mt-6">
-      <button onclick="location.reload()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors">
-        End Conversation
+      <button 
+        id="chatToggle"
+        onclick="toggleChat()"
+        class="bg-brand-teal hover:bg-brand-cyan text-white px-6 py-3 rounded-lg transition-colors font-medium"
+      >
+        Chat Now
       </button>
     </div>
   </div>
@@ -35,3 +39,29 @@ Have questions about the Oracle Entity Project? Chat directly with Virtual Caleb
 </div>
 
 <HeyGenWidget />
+
+<script>
+{`
+let chatActive = false;
+
+window.toggleChat = function() {
+  const button = document.getElementById('chatToggle');
+  const avatar = document.getElementById('heygen-streaming-embed');
+  
+  if (!chatActive) {
+    // Start chat
+    button.textContent = 'End Conversation';
+    button.className = 'bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors font-medium';
+    chatActive = true;
+    
+    // Simulate clicking the avatar to start
+    if (avatar) {
+      avatar.click();
+    }
+  } else {
+    // End chat
+    location.reload();
+  }
+}
+`}
+</script>
