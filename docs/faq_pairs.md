@@ -25,7 +25,7 @@
 **A:** RAG system uses verified historical documents, academic sources, and estate-approved materials where possible. AI admits uncertainty and cites sources for transparency.
 
 **Q:** What makes this different from other AI chatbots?
-**A:** Immersive holographic presence with environmental lighting, particle aesthetics, and authentic voice cloning. Focus on Indiana heritage with deep historical research and academic partnerships.
+**A:** Holographic presence with environmental lighting, particle aesthetics, and voice cloning. Focus on Indiana heritage with historical research and academic partnerships.
 
 **Q:** How do visitors interact with the Oracle?
 **A:** Natural speech through beam-forming microphones. Motion detection triggers persona materialization. Conversation flows naturally with visual feedback through particle animations.
@@ -118,7 +118,7 @@
 **A:** Currently English-focused with multilingual expansion planned. Translation capabilities, cultural adaptation, international visitor accommodation under consideration.
 
 **Q:** What's the cultural impact goal?
-**A:** Preserve Indiana heritage, inspire new conversations about history, demonstrate innovative cultural technology, create memorable educational experiences, strengthen community connections.
+**A:** Preserve Indiana heritage, inspire new conversations about history, demonstrate cultural technology applications, create memorable educational experiences, strengthen community connections.
 
 **Q:** How scalable is the technology?
 **A:** Highly modular system design, cloud-based processing options, standardized hardware components, documented implementation procedures, replication-ready architecture.

@@ -157,9 +157,9 @@ This schema defines the structure for all video clips in the Oracle system:
 - **duration**: Length in seconds
 - **emotion**: Optional emotional state for context-aware selection
 - **path**: File system or CDN path to video asset
-- **bookend**: Whether clip uses standard start/end frames for seamless transitions
+- **bookend**: Whether clip uses standard start/end frames for smooth transitions
 - **cooldown**: Minimum seconds before clip can be replayed
-- **tags**: Additional metadata for enhanced routing decisions
+- **tags**: Additional metadata for routing decisions
 
 The schema file is also available at [`/spec/clip_schema.json`](/spec/clip_schema.json) for direct integration with validation tools.
 
@@ -358,7 +358,7 @@ The optimal architecture separates speech processing, avatar animation, and deli
 ### Cost Analysis and Deployment Strategy
 
 **Operational costs scale with usage**
-Basic deployments start at \$0.13/minute using cloud resources, scaling to \$0.52/minute for enterprise configurations. Monthly costs range from \$500 for prototypes to \$15,000+ for production systems. The break-even point for self-hosted versus API-based solutions typically occurs at 6-12 months with \$3,000-\$5,000 monthly usage.
+Basic deployments start at \$0.13/minute using cloud resources, scaling to \$0.52/minute for full production configurations. Monthly costs range from \$500 for prototypes to \$15,000+ for production systems. The break-even point for self-hosted versus API-based solutions typically occurs at 6-12 months with \$3,000-\$5,000 monthly usage.
 
 **Recommended deployment approach**
 Start with HeyGen's API for rapid prototyping at \$99-\$330/month, enabling immediate testing without infrastructure investment. Simultaneously develop the particle masking system using TouchDesigner on local RTX 4090 hardware. Once monthly costs exceed \$3,000, transition to a hybrid approach with on-premise Audio2Face for avatar generation while maintaining cloud APIs for overflow capacity.
