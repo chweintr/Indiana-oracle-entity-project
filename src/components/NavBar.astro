@@ -1,21 +1,24 @@
 ---
 const pathname = Astro.url.pathname;
 
-const navItems = [
+const primaryNavItems = [
   { href: '/', label: 'Home' },
   { href: '/experience', label: 'Experience' },
   { href: '/personas', label: 'Personas' },
   { href: '/tech', label: 'Tech' },
   { href: '/voice-demo', label: 'Voice Demo' },
   { href: '/implementation', label: 'Implementation' },
-  { href: '/peppers-ghost-spec', label: 'PG Spec' },
   { href: '/budget', label: 'Budget' },
-  { href: '/impact', label: 'Impact' },
+  { href: '/impact', label: 'Impact' }
+];
+
+const secondaryNavItems = [
   { href: '/broader-vision', label: 'Broader Vision' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/peppers-ghost-spec', label: 'PG Spec' },
   { href: '/technical-notes', label: 'Production Notes' },
   { href: '/research-materials', label: 'Research' },
-  { href: '/ask-questions', label: 'Ask Questions' }
+  { href: '/ask-questions', label: 'Ask Questions' },
+  { href: '/contact', label: 'Contact' }
 ];
 
 function isActive(href: string): boolean {
@@ -35,14 +38,32 @@ function isActive(href: string): boolean {
         </a>
       </div>
       <div class="hidden md:block">
-        <div class="ml-10 flex items-baseline space-x-4">
-          {navItems.map((item) => (
+        <div class="ml-10 flex items-baseline space-x-3">
+          {primaryNavItems.map((item) => (
             <a 
               href={item.href} 
-              class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              class={`px-2 py-2 rounded-md text-sm font-medium transition-colors ${
                 isActive(item.href) 
                   ? 'text-yellow-400 hover:text-yellow-300' 
                   : 'text-white hover:text-brand-teal'
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div class="hidden md:block border-t border-brand-teal/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-baseline space-x-3 py-2 justify-end">
+          {secondaryNavItems.map((item) => (
+            <a 
+              href={item.href} 
+              class={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${
+                isActive(item.href) 
+                  ? 'text-yellow-400 hover:text-yellow-300' 
+                  : 'text-gray-300 hover:text-brand-teal'
               }`}
             >
               {item.label}
