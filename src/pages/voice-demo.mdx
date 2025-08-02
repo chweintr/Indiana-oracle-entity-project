@@ -7,48 +7,29 @@ import NavBar from '../components/NavBar.astro';
 
 <NavBar />
 
-<div class="max-w-4xl mx-auto px-4 py-16">
+<div class="max-w-4xl mx-auto px-4 py-16 text-center">
 
 # Voice-to-Voice Demo
 
-Experience an early prototype of the conversational AI system powering Echoes of Indiana. This demo showcases the real-time voice interaction capabilities, though without the full holographic visual component.
-
 <div class="my-12">
-  <div class="bg-brand-navy/30 rounded-lg border border-brand-teal/20 p-8">
-    <h2 class="text-2xl font-bold text-brand-teal mb-4">Try the Live Demo</h2>
-    <p class="text-gray-300 mb-6">
-      This working prototype demonstrates the sub-second response times and natural conversation flow 
-      that will power the full Oracle experience. The visual avatar integration is still in development.
+  <div class="bg-brand-navy/30 rounded-lg border border-brand-teal/20 p-8 max-w-2xl mx-auto">
+    <h2 class="text-2xl font-bold text-brand-teal mb-4">Try the Live Prototype</h2>
+    <p class="text-gray-300 mb-8">
+      Experience an early prototype of the conversational AI system. 
+      This demo showcases real-time voice interaction capabilities.
     </p>
     <a 
       href="https://echoestest-production.up.railway.app/" 
       target="_blank"
       rel="noopener noreferrer"
-      class="inline-flex items-center px-6 py-3 bg-brand-teal hover:bg-brand-magenta text-brand-navy font-bold rounded-lg transition-all duration-300 transform hover:scale-105"
+      class="inline-flex items-center px-8 py-4 bg-brand-teal hover:bg-brand-magenta text-brand-navy font-bold rounded-lg transition-all duration-300 transform hover:scale-105 text-lg"
     >
-      Launch Voice Demo →
+      Launch External Demo →
     </a>
+    <p class="text-sm text-gray-400 mt-4">
+      Opens in a new window
+    </p>
   </div>
 </div>
-
-## What You'll Experience
-
-- **Natural voice input** through your microphone
-- **Real-time AI responses** with < 1.5 second latency
-- **Conversational memory** maintaining context
-- **Indiana-focused knowledge** base
-
-## Technical Notes
-
-This demo represents the core conversational pipeline:
-- Speech-to-text processing (Whisper)
-- LLM inference (GPT-4)
-- Text-to-speech synthesis (ElevenLabs)
-
-The full installation will add:
-- Holographic display (LED rotor arrays or Pepper's Ghost)
-- Particle-based avatar visualization
-- Environmental lighting synchronization
-- Persona-specific voice models
 
 </div>
