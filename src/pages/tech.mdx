@@ -56,6 +56,29 @@ sequenceDiagram
 
 </div>
 
+## System Workflow
+
+### 1. Input Selection
+Visitors select a persona (Hoosier Oracle, Vonnegut, etc.) which triggers the idle state → transition animation → persona state sequence.
+
+### 2. Voice Processing Pipeline
+The system transcribes visitor speech, processes the query through GPT-4o (or other LLM), then converts the response to text-to-speech.
+
+### 3. Real-Time Animation
+Audio streams feed into facial animation systems (Audio2Face or Speech Graphics SGX) to generate lip-synced movement in real time.
+
+### 4. Visual Stylization
+Raw facial animation is transformed through a stylization layer:
+- Video-to-video processing adds spectral, particle-like effects
+- Real-time shaders create holographic appearance
+- TouchDesigner overlays particle systems for ethereal quality
+
+### 5. Live Display Output
+The stylized video with alpha channel is:
+- Processed through TouchDesigner for GPU effects
+- Output to the holographic display system
+- Seamlessly transitions between personas with particle scatter/gather animations
+
 ## Voice Synthesis & Persona Morphing
 
 Our AI system uses ElevenLabs' voice cloning technology to recreate the authentic speech patterns of each Indiana persona. Historical recordings, when available, are used to train persona-specific voice models. For figures without recorded speech, we employ linguistic analysis of their written works combined with regional accent modeling to create plausible voice representations.
